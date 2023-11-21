@@ -1,0 +1,90 @@
+% !TeX root = ./main.tex
+
+%%%%%%% 加载宏包
+
+% 语言文字包, Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}   % 多语言文字宏包
+
+% latex 宏包, 特殊字体
+% \usepackage{mathrsfs}   % 花体， \mathcal \to \mathscr
+% \usepackage{bbm}        % 粗体
+% % \usepackage{lmodern}  % 一种编码字体
+
+% 数学相关环境
+\usepackage{amsmath}     % 多种公式环境和数学命令
+% \usepackage{amssymb}   % 数学符号, 包含了 {amsfonts}
+% \usepackage{amsfonts}  % 美国数学学会在线数学宏包套件之一,其中之一 eucal
+% \usepackage[mathscr]{eucal}
+
+% \usepackage{esint}     % 额外积分符号, 必须在`amsthm` 之前
+\usepackage{extarrows}
+
+% 定理类环境宏包
+\usepackage{amsthm}     % 提供\theoremstyle定理样式、proof证明环境
+% \usepackage{theorem}  %  LaTeX 工具宏包套件之一，通过定义不同的 theorem 环境
+
+% 算法
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+% SI 量和单位
+\usepackage{siunitx}
+
+% 插图与表格
+\usepackage{graphicx}   % 插图
+\usepackage{subfig}     % 子图字体、索引等
+\usepackage{booktabs}   % 三线表
+\usepackage{longtable}  % 跨页表格
+\graphicspath{{figures/}}% 配置图片的默认目录
+
+% 参考文献使用 BibTeX + natbib 宏包
+\usepackage[sort]{natbib}
+
+% 设置起始
+% \setcounter{secnumdepth}{3}
+
+
+% 数学命令
+\makeatletter
+\newcommand\dif{%  % 微分符号
+  \mathop{}\!%
+  \ifustc@math@style@TeX
+    d%
+  \else
+    \mathrm{d}%
+  \fi
+}
+\makeatother
+\newcommand\eu{{\symup{e}}}
+\newcommand\iu{{\symup{i}}}
+
+% 公式字体大小修改
+\makeatletter
+\renewcommand{\maketag@@@}[1]{\hbox{\m@th\normalsize\normalfont#1}}%
+\makeatother
+
+% \newtheorem 是定义 “命题，定理，，定义，引理，假设，说明，证明，推论，例子” 等数学内容的命令
+
+% \newtheorem{theorem}{}
+
+% 用于写文档的命令
+\DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
+\DeclareRobustCommand\env{\texttt}
+\DeclareRobustCommand\pkg{\textsf}
+\DeclareRobustCommand\file{\nolinkurl}
+
+% hyperref 文档连接宏包在最后调用
+\usepackage{hyperref}  % 创建超文本链接和PDF书签
+\hypersetup{
+    breaklinks = true,
+    colorlinks = true,
+    citecolor = {blue},
+    urlcolor = {blue},
+    linkcolor = {blue}
+}
+
+% 文档内引用
+\usepackage{cleveref}
+
+% defining the abbreviations in the thesis
+\input{ABBreviations/ABBs.tex}

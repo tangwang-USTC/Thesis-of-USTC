@@ -1,0 +1,289 @@
+
+% % 文档内引用
+% \usepackage{cleveref}
+
+% defining the abbreviations for VFP equation.
+
+\global\long\def\Fhb{\hat{F}_b}
+\global\long\def\Fh{\hat{F}}
+\global\long\def\Hh{\hat{H}}
+\global\long\def\Gh{\hat{G}}
+ 
+ \global\long\def\Fs{F_s}
+ \global\long\def\Hs{H_s}
+ \global\long\def\Gs{G_s}
+ \global\long\def\Fb{F_b}
+ \global\long\def\colh{\hat{\frakC}}
+ \global\long\def\cola{\frakC}
+ \global\long\def\colha{\hat{\frakC}}
+ \global\long\def\collma{{\frakC{_l^m}}}
+ \global\long\def\colhlma{{\frakCh{_l^m}}}
+ \global\long\def\colla{{\frakC{_l^0}}}
+ \global\long\def\colhla{{\frakCh{_l^0}}}
+ \global\long\def\coloa{{\frakC{_0^0}}}
+ \global\long\def\colhoa{{\frakCh{_0^0}}}
+ \global\long\def\bh{\hat{b}}
+ \global\long\def\blma{{b{_l^m}}_a}
+ \global\long\def\bhlma{{b{_l^m}}_a}
+ \global\long\def\bla{{b{_l^0}}_a}
+ \global\long\def\bhla{{bh{_l^0}}_a}
+ \global\long\def\boa{{b{_0^0}}_a}
+ \global\long\def\bhoa{{bh{_0^0}}_a}
+ % % anisotropic FPS
+ \global\long\def\colTa{{\tilde{\frakC}}}
+ \global\long\def\colhTa{{\tilde{\frakCh}}}
+ 
+ \global\long\def\colaa{\frakC_{aa}}
+ \global\long\def\colab{\frakC_{ab}}
+ \global\long\def\colhab{\hat{\frakC}_{ab}}
+ \global\long\def\collmab{{\frakC{_l^m}}_{ab}}
+ \global\long\def\colhlmab{{\frakCh{_l^m}}_{ab}}
+ \global\long\def\collab{{\frakC{_l^0}}_{ab}}
+ \global\long\def\colhlab{{\frakCh{_l^0}}_{ab}}
+ \global\long\def\coloab{{\frakC{_0^0}}_{ab}}
+ \global\long\def\colhoab{{\frakCh{_0^0}}_{ab}}
+ % % anisotropic FPS
+ \global\long\def\colIab{{\tilde{\frakC}}_{ab}}
+ \global\long\def\colhIab{{\tilde{\frakCh}}_{ab}}
+ 
+ \global\long\def\colaa{\frakC_{aa}}
+ \global\long\def\colhaa{\hat{\frakC}_{aa}}
+ \global\long\def\collmaa{{\frakC{_l^m}}_{aa}}
+ \global\long\def\colhlmaa{{\frakCh{_l^m}}_{aa}}
+ \global\long\def\collaa{{\frakC{_l^0}}_{aa}}
+ \global\long\def\colhlaa{{\frakCh{_l^0}}_{aa}}
+ \global\long\def\coloaa{{\frakC{_0^0}}_{aa}}
+ \global\long\def\colhoaa{{\frakCh{_0^0}}_{aa}}
+ % anisotropic FPS
+ \global\long\def\colIaa{{\tilde{\frakC}}_{aa}}
+ \global\long\def\colhIaa{{\tilde{\frakCh}}_{aa}}
+ 
+ % {Ch_l}
+ \global\long\def\colhl{\frakCh_l}
+ \global\long\def\colhI{\frakCh_1}
+ \global\long\def\colhII{\frakCh_2}
+ \global\long\def\Sh{\scrSh}
+ \global\long\def\Sha{\Sh_a}
+ \global\long\def\Shab{\Sh_{ab}}
+ 
+ \global\long\def\colei{\frakC_{ei}}
+ \global\long\def\colee{\frakC_{ee}}
+ \global\long\def\colie{\frakC_{ie}}
+ \global\long\def\colii{\frakC_{ii}}
+ 
+ \global\long\def\CFh{C_{\Fh}}
+ \global\long\def\CHh{C_{\Hh}}
+ \global\long\def\CGh{C_{\Gh}}
+ 
+ \global\long\def\csrflm{\csrf_l^m}
+ \global\long\def\Plm{P_l^m}
+ \global\long\def\Ylm{Y_l^m}
+ \global\long\def\Plmabs{P_l^{\left|m \right|}}
+ \global\long\def\Alm{\calA_l^m}
+ \global\long\def\Blm{\calB_l^m}
+ \global\long\def\Elm{\calE_l^m}
+ \global\long\def\FLM{F_L^M}
+ \global\long\def\HLM{H_L^M}
+ \global\long\def\GLM{G_L^M}
+ \global\long\def\YLM{Y_L^M}
+ \global\long\def\PLM{P_L^M}
+ \global\long\def\PLMabs{P_L^{\left|M \right|}}
+ \global\long\def\Pl{P_l^0}
+ \global\long\def\Al{\calA_l^0}
+ \global\long\def\Bl{\calB_l^0}
+ \global\long\def\El{\calE_l^0}
+ \global\long\def\FL{F_L^0}
+ \global\long\def\HL{H_L^0}
+ \global\long\def\GL{G_L^0}
+ \global\long\def\PL{P_L^0}
+ 
+ 
+ \global\long\def\Ao{\calA_0^0}
+ \global\long\def\Bo{\calB_0^0}
+ \global\long\def\Eo{\calE_0^0}
+ 
+ \global\long\def\PlI{P_l^1}
+ \global\long\def\PlII{P_l^2}
+ \global\long\def\PLI{P_L^1}
+ \global\long\def\PLII{P_L^2}
+ \global\long\def\PlIcotQ{P_l^{1,\mu}}
+ \global\long\def\PLIcotQ{P_L^{1,\mu}}
+ \global\long\def\PlIlII{P_l^{1,2}}
+ \global\long\def\PLILII{P_L^{1,2}}
+ 
+ \global\long\def\Ahlm{\hat{\calA}_l^m}
+ \global\long\def\Bhlm{\hat{\calB}_l^m}
+ \global\long\def\Ehlm{\hat{\calE}_l^m}
+ \global\long\def\Bhlm{\hat{\calB}_l^m}
+ \global\long\def\Ehlm{\hat{\calE}_l^m}
+ \global\long\def\Fhlm{\hat{F}_L^M}
+ \global\long\def\Hhlm{\hat{H}_L^M}
+ \global\long\def\Ghlm{\hat{G}_L^M}
+ % m = 0
+ \global\long\def\Ahl{\hat{\calA}_l^0}
+ \global\long\def\Bhl{\hat{\calB}_l^0}
+ \global\long\def\Ehl{\hat{\calE}_l^0}
+ \global\long\def\FhL{\hat{F}_L^0}
+ \global\long\def\HhL{\hat{H}_L^0}
+ \global\long\def\GhL{\hat{G}_L^0}
+ % l = m = 0
+ \global\long\def\Aho{\hat{\calA}_0^0}
+ \global\long\def\Eho{\hat{\calE}_0^0}
+ \global\long\def\Bho{\hat{\calB}_0^0}
+ \global\long\def\Fho{\hat{F}_0^0}
+ \global\long\def\Hho{\hat{H}_0^0}
+ \global\long\def\Gho{\hat{G}_0^0}
+ \global\long\def\Ah{\hat{\calA}}
+ \global\long\def\Eh{\hat{\calE}}
+ 
+ \global\long\def\HF{H \left(F \right)}
+ \global\long\def\GF{G \left(F \right)}
+ \global\long\def\HFh{\hat{H} \left(\hat{F} \right)}
+ \global\long\def\GFh{\hat{G} \left(\hat{F} \right)}
+ \global\long\def\Hf{H \left(f \right)}
+ \global\long\def\Gf{G \left(f \right)}
+ \global\long\def\Hfh{\hat{H} \left(\fh \right)}
+ \global\long\def\Gfh{\hat{G} \left(\fh \right)}
+ \global\long\def\Gab{\Gamma_{ab}}
+ \global\long\def\Gabh{\hat{\Gamma}_{ab}}
+ \global\long\def\lnAab{ln \Lambda_{ab}}
+
+ \global\long\def\vthna{\frac{\rmv_{ath}^3}{n_a}}
+ \global\long\def\navth{\frac{n_a}{\rmv_{ath}^3}}
+ \global\long\def\nbvth{\frac{n_b}{\rmv_{bth}^3}}
+ \global\long\def\navthf{\left(\navth \fh \right)}
+ \global\long\def\navthflm{\left(\navth {\fh_l^m} \right)}
+ \global\long\def\navthfl{\left(\navth {\fh_l^0} \right)}
+ \global\long\def\navthfo{\left(\navth {\fh_0^0} \right)}
+ 
+ 
+ \global\long\def\CA{C_A}
+ \global\long\def\CE{C_E}
+ \global\long\def\CB{C_B}
+ 
+ \global\long\def\CAlnm{\CA{_{l-1}^m}}
+ \global\long\def\CAlpm{\CA{_{l+1}^m}}
+ \global\long\def\CAlnmn{\CA{_{l-1}^{m-1}}}
+ \global\long\def\CAlpmn{\CA{_{l+1}^{m-1}}}
+ \global\long\def\CAlnmp{\CA{_{l-1}^{m+1}}}
+ \global\long\def\CAlpmp{\CA{_{l+1}^{m+1}}}
+ 
+ \global\long\def\CElnm{\CE{_{l-1}^m}}
+ \global\long\def\CElpm{\CE{_{l+1}^m}}
+ \global\long\def\CElnmn{\CE{_{l-1}^{m-1}}}
+ \global\long\def\CElpmn{\CE{_{l+1}^{m-1}}}
+ \global\long\def\CElnmp{\CE{_{l-1}^{m+1}}}
+ \global\long\def\CElpmp{\CE{_{l+1}^{m+1}}}
+ 
+ \global\long\def\CBlmn{\CB{_{l}^{m-1}}}
+ \global\long\def\CBlm{\CB{_{l}^m}}
+ \global\long\def\CBlmp{\CB{_{l}^{m+1}}}
+ 
+ \global\long\def\CAlno{\CA{_{l-1}^0}}
+ \global\long\def\CAlpo{\CA{_{l+1}^0}}
+ \global\long\def\CAlnI{\CA{_{l-1}^1}}
+ \global\long\def\CAlpI{\CA{_{l+1}^1}}
+ 
+ \global\long\def\CElno{\CE{_{l-1}^0}}
+ \global\long\def\CElpo{\CE{_{l+1}^0}}
+ \global\long\def\CElnI{\CE{_{l-1}^1}}
+ \global\long\def\CElpI{\CE{_{l+1}^1}}
+ 
+ \global\long\def\CBlo{\CB{_{l}^0}}
+ \global\long\def\CBlI{\CB{_{l}^1}}
+
+ \global\long\def\Fho{\Fh{_0^0}}
+ \global\long\def\Hho{\Hh{_0^0}}
+ \global\long\def\Gho{\Gh{_0^0}}
+
+ 
+ \global\long\def\calGhlm{\hat{\calG}_l^m}
+ \global\long\def\calHhlm{\hat{\calH}_l^m}
+ \global\long\def\calGhlnm{\hat{\calG}_{l-1}^m}
+ \global\long\def\calHhlpm{\hat{\calH}_{l+1}^m}
+ \global\long\def\calGhlnmp{\hat{\calG}_{l-1}^{m+1}}
+ \global\long\def\calHhlpmp{\hat{\calH}_{l+1}^{m+1}}
+ \global\long\def\calGhlnmn{\hat{\calG}_{l-1}^{m-1}}
+ \global\long\def\calHhlpmn{\hat{\calH}_{l+1}^{m-1}}
+ 
+ \global\long\def\calGhlno{\hat{\calG}_{l-1}^0}
+ \global\long\def\calHhlpo{\hat{\calH}_{l+1}^0}
+ \global\long\def\calGhlnI{\hat{\calG}_{l-1}^{1}}
+ \global\long\def\calHhlpI{\hat{\calH}_{l+1}^{1}}
+
+ \global\long\def\calRhjlm{{\calRh}_{j,l}^{m}}
+ \global\long\def\calRhjlo{{\calRh}_{j,l}^{0}}
+ \global\long\def\calRjlm{{\calR}_{j,l}^{m}}
+ \global\long\def\calRjlo{{\calR}_{j,l}^{0}}
+ 
+ % The Shkarofsky Integrations for Rosenbluth potentials
+ \global\long\def\IjFhlm{I_{j,L}^M}
+ \global\long\def\JjFhlm{J_{j,L}^M}
+ \global\long\def\IjFhl{I_{j,L}^0}
+ \global\long\def\JjFhl{J_{j,L}^0}
+ % ILFLM, IL2FLM
+ \global\long\def\ILFhlm{I_{L,L}^M}
+ \global\long\def\ILIIFhlm{I_{L+2,L}^M}
+ \global\long\def\ILFhl{I_{L,L}^0}
+ \global\long\def\ILIIFhl{I_{L+2,L}^0}
+ % JL1FLM, JLn1FLM
+ \global\long\def\JLpFhlm{J_{L+1,L}^M}
+ \global\long\def\JLnFhlm{J_{L-1,L}^M}
+ \global\long\def\JLpFhl{J_{L+1,L}^0}
+ \global\long\def\JLnFhl{J_{L-1,L}^0}
+
+ % dGL0, ddGL0
+ \global\long\def\dGhL{\frac{\partial \GhL}{\partial \hat{\scrv}}}
+ \global\long\def\ddGhL{\frac{\partial^2 \GhL}{\partial {\hat{\scrv}}^2}}
+ % dHLM, ddHLM
+ \global\long\def\dHhLM{\frac{\partial \HhLM}{\partial \hat{\scrv}}}
+ \global\long\def\ddHhLM{\frac{\partial^2 \HhLM}{\partial {\hat{\scrv}}^2}}
+ % dHL0, ddHL0
+ \global\long\def\dHhL{\frac{\partial \HhL}{\partial \hat{\scrv}}}
+ \global\long\def\ddHhL{\frac{\partial^2 \HhL}{\partial {\hat{\scrv}}^2}}
+ % dH00, ddH00
+ \global\long\def\dHho{\frac{\partial \Hho}{\partial \hat{\scrv}}}
+ \global\long\def\ddHho{\frac{\partial^2 \Hho}{\partial {\hat{\scrv}}^2}}
+ 
+ % dfLm, ddfLm
+ \global\long\def\dfhlm{\frac{\partial \fhlm}{\partial \hat{\rmv}}}
+ \global\long\def\ddfhlm{\frac{\partial^2 \fhlm}{\partial {\hat{\rmv}}^2}}
+ % dfL0, ddfL0
+ \global\long\def\dfhl{\frac{\partial \fhl}{\partial \hat{\rmv}}}
+ \global\long\def\ddfhl{\frac{\partial^2 \fhl}{\partial {\hat{\rmv}}^2}}
+ % df00, ddf00
+ \global\long\def\dfho{\frac{\partial \fho}{\partial \hat{\rmv}}}
+ \global\long\def\ddfho{\frac{\partial^2 \fho}{\partial {\hat{\rmv}}^2}}
+
+% Gaussian quadratures
+ \global\long\def\rmvha{{\rmvh}_\alpha}
+ \global\long\def\mub{{\mu}_\beta}
+ \global\long\def\phic{{\phi}_\gamma}
+ \global\long\def\wrmvh{w_{\rmvh}}
+ \global\long\def\wmu{w_{\mu}}
+ \global\long\def\wphi{w_{\phi}}
+ \global\long\def\wrmvha{w_{{\rmvh}_\alpha}}
+ \global\long\def\wmub{w_{{\mu}_\beta}}
+ \global\long\def\wphic{w_{{\phi}_\gamma}}
+
+% 伪谱矩阵
+ \global\long\def\Mv{M_{\rmv}}
+ \global\long\def\Mvh{M_{\rmvh}}
+ \global\long\def\Mmu{M_{\mu}}
+ \global\long\def\Mphi{M_{\phi}}
+ \global\long\def\MvnIA{M_{{\rmv}_{n_1,\alpha}}}
+ \global\long\def\MvhnIA{M_{{\rmvh}_{n_1,\alpha}}}
+ \global\long\def\MmulIb{M_{{\mu}_{l_1,\beta}}}
+\global\long\def\MphimIc{M_{{\phi}_{m+1,\gamma}}}
+% 转置矩阵
+\global\long\def\MmublI{M_{{\mu}_{\beta,l_1}}}
+\global\long\def\MphicmI{M_{{\phi}_{\gamma,m+1}}}
+
+ % linearized FPS model
+ \global\long\def\Slomo{S_{l,0}^{m,0}}
+ \global\long\def\Clomo{C_{l,0}^{m,0}}
+ \global\long\def\Dlomo{D_{l,0}^{m,0}}
+ \global\long\def\SoLoM{S_{0,L}^{0,M}}
+ \global\long\def\CoLoM{C_{0,L}^{0,M}}
+ \global\long\def\DoLoM{D_{0,L}^{0,M}}
+ 

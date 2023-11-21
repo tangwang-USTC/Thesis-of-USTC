@@ -1,0 +1,133 @@
+% !TeX root = ../main.tex
+
+\chapter{补充材料}
+
+
+\section{球极坐标系}
+
+球极坐标系采用欧式距离$\rmvh$、极向角$\mu=\cos{\theta}$与方位角$\phi$为坐标轴；其三个基矢分别记为
+$(\bfe_1, \bfe_2, \bfe_3) = (\bfe_{\vh}, \bfe_{\mu}, \bfe_{\phi})$。
+球极坐标系与笛卡尔坐标$(\rmvh_x$、$\rmvh_y$、$\rmvh_z )$的关系可以表示为
+   \begin{eqnarray}
+       \rmvh &= & \left |\vh \right| = \sqrt{\rmvh_x^2 +\rmvh_y^2 +\rmvh_z^2},\label{vhxyz}  \\
+       \mu &=& \rmvh_z / \rmvh,   -1 \le \mu \le 1, \label{vmu} \\
+       \phi &=& \arctan_2{\left(\rmvh_y,\rmvh_x \right)},   0 \le \phi <2 \pi ~. \label{vphi}
+   \end{eqnarray}
+   其中，函数$\arctan_2{\left(\rmvh_y,\rmvh_x \right)}$表征速度轴$\rmvh_x$到矢量$\left(\rmvh_y,\rmvh_x \right)$之间的夹角；其范围为$\left[0,2\pi \right)$。对应的逆变换为
+   \begin{eqnarray}
+       \rmvh_x &= & \rmvh \sinQ \cos{\phi}, \label{vhx} \\
+       \rmvh_y &= & \rmvh \sinQ \sin{\phi}, \label{vhy} \\
+       \rmvh_z &= & \rmvh \mu ~. \label{vhz}
+   \end{eqnarray}
+
+归一化速度空间采用球极坐标系$(\rmvh,\mu,\phi)$时，梯度算符为
+\begin{eqnarray}
+    \ddbfvh &=& \bfe_1 \ddrmvh  - \bfe_2 \frac{\sinQ}{\rmvh} \ddmu + \bfe_3 \frac{1}{\rmvh \sinQ} \ddphi ~. \label{gradsp}
+\end{eqnarray}
+Laplace算符为
+\begin{eqnarray}
+    \ddbfvh^2 &=& \ddbfvh \cdot \ddbfvh = \olra{I} : \ddbfvh \ddbfvh = \left(\dddrmvh + \frac{2}{\rmvh} \ddrmvh \right) + \nabla_{\Omega_{\rmvh}}^2  ~. \label{Laplacesp}
+\end{eqnarray}
+其中，角度Laplace算符
+\begin{eqnarray}
+    \nabla_{\Omega_{\rmvh}}^2 &=& \frac{1-\mu^2}{\rmvh^2} \dddmu - \frac{2 \mu}{\rmvh^2} \ddmu + \frac{1}{\rmvh^2 (1-\mu^2)} \dddphi  ~. \label{Laplacesp2}
+\end{eqnarray}
+二阶梯度算符是具有对称性的张量算符。记$\scrT = \ddbfvh \ddbfvh$，则有
+\begin{equation}
+    \scrT_{ij} = \scrT_{ji} ~.
+\end{equation}
+其上对角矩阵为
+\begin{eqnarray}
+    \scrT_{Up} &=& 
+    \begin{bmatrix}
+        \bfe_1 \\ \bfe_2 \\ \bfe_3
+    \end{bmatrix}
+    \begin{bmatrix}
+      \dddrmv & \sinQ \left(\frac{1}{\rmvh^2} \ddmu - \frac{1}{\rmvh} \ddmu \ddrmvh \right) & \frac{1}{\sinQ} \left(\frac{1}{\rmvh} \ddrmvh - \frac{1}{\rmvh^2}\right) \ddphi\\
+      \cdot & \frac{1}{\rmvh} \ddrmvh - \frac{\mu}{\rmvh^2} \ddmu + \frac{1-\mu^2}{\rmvh^2} \dddmu & - \frac{1}{\rmvh^2} \left(\ddmu + \frac{\mu}{1-\mu^2} \right) \ddphi \\
+      \cdot & \cdot & \frac{1}{\rmvh} \ddrmvh - \frac{\mu}{\rmvh^2} \ddmu + \frac{1}{\rmvh^2} \frac{1}{1-\mu^2} \dddphi 
+      \end{bmatrix} ~. \label{gradgradspup}
+\end{eqnarray}
+
+当速度空间具有轴对称性，与方位角$\phi$相关的方向导数项为零。此时梯度算符、角度Laplace算符与二阶梯度算符的上对角矩阵分别为
+\begin{eqnarray}
+    \ddbfvh &=& \bfe_1 \ddrmvh  - \bfe_2 \frac{\sinQ}{\rmvh} \ddmu , \label{gradspAxis} 
+    \\ 
+    \nabla_{\Omega_{\rmvh}}^2 &=& \frac{1-\mu^2}{\rmvh^2} \dddmu - \frac{2 \mu}{\rmvh^2} \ddmu  , \label{Laplace1sp2Axis} 
+    \\ 
+    \scrT_{Up} &=& 
+    \begin{bmatrix}
+        \bfe_1 \\ \bfe_2 \\ \bfe_3
+    \end{bmatrix}
+    \begin{bmatrix}
+      \dddrmv & \sinQ \left(\frac{1}{\rmvh^2} \ddmu - \frac{1}{\rmvh} \ddmu \ddrmvh \right) & 0 \\
+      \cdot & \frac{1}{\rmvh} \ddrmvh - \frac{\mu}{\rmvh^2} \ddmu + \frac{1-\mu^2}{\rmvh^2} \dddmu & 0 \\
+      \cdot & \cdot & \frac{1}{\rmvh} \ddrmvh - \frac{\mu}{\rmvh^2} \ddmu 
+      \end{bmatrix} ~. \label{gradgradspupAxis}
+\end{eqnarray}
+
+特别地，当速度空间具有球对称性时，与方位角$\phi$及极向角$\mu$相关的方向导数项皆为零。此时梯度算符、Laplace算符与二阶梯度算符别为
+\begin{eqnarray}
+    \ddbfvh &=& \bfe_1 \ddrmvh  , \label{gradsp1} 
+    \\
+    \ddbfvh^2 &=& \left(\dddrmvh + \frac{2}{\rmvh} \ddrmvh \right) , \label{Laplacesp1} 
+    \\ 
+    \scrT &=& 
+    \begin{bmatrix}
+        \bfe_1 \\ \bfe_2 \\ \bfe_3
+    \end{bmatrix}
+    \begin{bmatrix}
+      \dddrmv & 0 & 0 \\
+      0 & \frac{1}{\rmvh} \ddrmvh & 0 \\
+      0 & \ 0 & \frac{1}{\rmvh} \ddrmvh 
+      \end{bmatrix} ~. \label{gradgradsp1}
+\end{eqnarray}
+此时，二阶梯度算符只有非零的主元。
+
+矢量运算
+
+
+
+\section{特殊函数}
+
+\subsection{Legendre函数}
+
+\subsection{球谐函数}
+
+\subsection{Laguerre函数}
+
+\subsection{Chebyshev函数}
+
+\subsection{Besseli函数}
+
+\subsection{King函数}
+
+\subsection{误差函数}
+
+\subsection{伽马函数}
+
+\subsection{超几何函数}
+
+
+\section{高精度积分}
+
+\subsection{自动微积分}
+\subsection{Gaussian积分}
+\subsection{Romberg积分}
+
+补充内容。
+
+
+\section{插值}
+
+\subsection{映射插值}
+\subsection{Lagrange插值}
+\subsection{Chebyshev插值}
+\subsection{样条插值}
+\subsection{神经网络插值}
+
+补充内容。
+
+\section{VFP方程常系数}
+
+补充内容。

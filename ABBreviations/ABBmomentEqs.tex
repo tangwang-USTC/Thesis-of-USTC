@@ -1,0 +1,144 @@
+
+% % 文档内引用
+% \usepackage{cleveref}
+
+% defining the abbreviations for moment equations of VFP equation.
+
+  % m, l, j
+  \global\long\def\calMhjplnmn{{\calMh}{_{j+1,l-1}^{m-1}}}
+  \global\long\def\calMhjplpmn{{\calMh}{_{j+1,l+1}^{m-1}}}
+  \global\long\def\calMhjplnmp{{\calMh}{_{j+1,l-1}^{m+1}}}
+  \global\long\def\calMhjplpmp{{\calMh}{_{j+1,l+1}^{m+1}}}
+  \global\long\def\calMhjplnm{{\calMh}{_{j+1,l-1}^{m}}}
+  \global\long\def\calMhjplpm{{\calMh}{_{j+1,l+1}^{m}}}
+  
+  \global\long\def\calMhjnlnmn{{\calMh}{_{j-1,l-1}^{m-1}}}
+  \global\long\def\calMhjnlpmn{{\calMh}{_{j-1,l+1}^{m-1}}}
+  \global\long\def\calMhjnlnmp{{\calMh}{_{j-1,l-1}^{m+1}}}
+  \global\long\def\calMhjnlpmp{{\calMh}{_{j-1,l+1}^{m+1}}}
+  \global\long\def\calMhjnlnm{{\calMh}{_{j-1,l-1}^{m}}}
+  \global\long\def\calMhjnlpm{{\calMh}{_{j-1,l+1}^{m}}}
+  
+  \global\long\def\calMhjlmn{{\calMh}{_{j,l}^{m-1}}}
+  \global\long\def\calMhjlm{{\calMh}{_{j,l}^{m}}}
+  \global\long\def\calMhjlmp{{\calMh}{_{j,l}^{m+1}}}
+  
+  \global\long\def\calMhAjlm{{\calMh_A}{_{j,l}^m}}
+  \global\long\def\calMhAxjlm{{\calMh_{A_x}}{_{j,l}^m}}
+  \global\long\def\calMhAyjlm{{\calMh_{A_y}}{_{j,l}^m}}
+  \global\long\def\calMhAzjlm{{\calMh_{A_z}}{_{j,l}^m}}
+  
+  \global\long\def\calMhBjlm{{\calMh_B}{_{j,l}^m}}
+  \global\long\def\calMhBxjlm{{\calMh_{B_x}}{_{j,l}^m}}
+  \global\long\def\calMhByjlm{{\calMh_{B_y}}{_{j,l}^m}}
+  \global\long\def\calMhBzjlm{{\calMh_{B_z}}{_{j,l}^m}}
+  
+  \global\long\def\calMhEjlm{{\calMh_E}{_{j,l}^m}}
+  \global\long\def\calMhExjlm{{\calMh_{E_x}}{_{j,l}^m}}
+  \global\long\def\calMhEyjlm{{\calMh_{E_y}}{_{j,l}^m}}
+  \global\long\def\calMhEzjlm{{\calMh_{E_z}}{_{j,l}^m}}
+
+  
+ \global\long\def\CME{C_{M_E}}
+ \global\long\def\CMElnm{\CME{_{j,l-1}^m}}
+ \global\long\def\CMElpm{\CME{_{j,l+1}^m}}
+ \global\long\def\CMElnmn{\CME{_{j,l-1}^{m-1}}}
+ \global\long\def\CMElpmn{\CME{_{j,l+1}^{m-1}}}
+ \global\long\def\CMElnmp{\CME{_{j,l-1}^{m+1}}}
+ \global\long\def\CMElpmp{\CME{_{j,l+1}^{m+1}}}
+
+ % m = 0, l , j
+  \global\long\def\calMhjplnI{{\calMh}{_{j+1,l-1}^1}}
+  \global\long\def\calMhjplpI{{\calMh}{_{j+1,l+1}^1}}
+  \global\long\def\calMhjplno{{\calMh}{_{j+1,l-1}^0}}
+  \global\long\def\calMhjplpo{{\calMh}{_{j+1,l+1}^0}}
+  
+  \global\long\def\calMhjnlnI{{\calMh}{_{j-1,l-1}^1}}
+  \global\long\def\calMhjnlpI{{\calMh}{_{j-1,l+1}^1}}
+  \global\long\def\calMhjnlno{{\calMh}{_{j-1,l-1}^0}}
+  \global\long\def\calMhjnlpo{{\calMh}{_{j-1,l+1}^0}}
+  
+  \global\long\def\calMhjlI{{\calMh}{_{j,l}^1}}
+  \global\long\def\calMhjlo{{\calMh}{_{j,l}^0}}
+  \global\long\def\calMjlI{{\calM}{_{j,l}^1}}
+  \global\long\def\calMjlo{{\calM}{_{j,l}^0}}
+  \global\long\def\calIjlI{{\calI}{_{j,l}^1}}
+  \global\long\def\calIjlo{{\calI}{_{j,l}^0}}
+  \global\long\def\calMjoo{{\calM}{_{j,0}^0}}
+  \global\long\def\calMjIo{{\calM}{_{j,1}^0}}
+  
+  \global\long\def\calMhAjl{{\calMh_A}{_{j,l}^0}}
+  \global\long\def\calMhAxjl{{\calMh_{A_x}}{_{j,l}^0}}
+  \global\long\def\calMhAyjl{{\calMh_{A_y}}{_{j,l}^0}}
+  \global\long\def\calMhAzjl{{\calMh_{A_z}}{_{j,l}^0}}
+  
+  \global\long\def\calMhBjl{{\calMh_B}{_{j,l}^0}}
+  \global\long\def\calMhBxjl{{\calMh_{B_x}}{_{j,l}^0}}
+  \global\long\def\calMhByjl{{\calMh_{B_y}}{_{j,l}^0}}
+  \global\long\def\calMhBzjl{{\calMh_{B_z}}{_{j,l}^0}}
+  
+  \global\long\def\calMhEjl{{\calMh_E}{_{j,l}^0}}
+  \global\long\def\calMhExjl{{\calMh_{E_x}}{_{j,l}^0}}
+  \global\long\def\calMhEyjl{{\calMh_{E_y}}{_{j,l}^0}}
+  \global\long\def\calMhEzjl{{\calMh_{E_z}}{_{j,l}^0}}
+
+  % m = 0, l = 1, j
+  \global\long\def\calMhjpIo{{\calMh}{_{j+1,1}^0}}
+  \global\long\def\calMhjnIo{{\calMh}{_{j-1,1}^0}}
+  \global\long\def\calMhjpII{{\calMh}{_{j+1,1}^1}}
+  \global\long\def\calMhjnII{{\calMh}{_{j-1,1}^1}}
+  \global\long\def\calMhjIo{{\calMh}{_{j,1}^0}}
+
+  % m = l = 0, j
+  \global\long\def\calMhj{{\calMh}{_{j,0}^0}}
+  \global\long\def\calMhAj{{\calMh_A}{_{j,0}^0}}
+  \global\long\def\calMhEj{{\calMh_E}{_{j,0}^0}}
+
+ \global\long\def\CMElno{\CME{_{j,l-1}^0}}
+ \global\long\def\CMElpo{\CME{_{j,l+1}^0}}
+ \global\long\def\CMElnI{\CME{_{j,l-1}^1}}
+ \global\long\def\CMElpI{\CME{_{j,l+1}^1}}
+ 
+  % m = l = 1
+  % j = 0
+  \global\long\def\calMhIIo{{\calMh}{_{1,1}^0}}
+  % j = 1
+  \global\long\def\calMhIII{{\calMh}{_{1,1}^1}}
+  
+  % m = l = 0
+  % j = 0
+  \global\long\def\calMho{{\calMh}{_{0,0}^0}}
+  \global\long\def\calMhAo{{\calMh_A}{_{0,0}^0}}
+
+  % Mhj(fhl)
+  \global\long\def\calMhjfhl{{\calMh}_j \left ( \left \{\bffh_l\right \} \right)}
+  % Mhj(fh0)
+  \global\long\def\calMhjfho{{\calMh}_j \left ( \left \{\bffh_0\right \} \right)}
+  % Mhj(fh1)
+  \global\long\def\calMhjfhI{{\calMh}_j \left ( \left \{\bffh_1\right \} \right)}
+  % Mhj(fh2)
+  \global\long\def\calMhjfhII{{\calMh}_j \left ( \left \{\bffh_2\right \} \right)}
+  
+  % Mh_{j+1}(fhl)
+  \global\long\def\calMhjpfhl{{\calMh}_{j+1} \left ( \left \{\bffh_l\right \} \right)}
+  % Mh{j+1}(fh0)
+  \global\long\def\calMhjpfho{{\calMh}_{j+1} \left ( \left \{\bffh_0\right \} \right)}
+  % Mh{j+1}(fh1)
+  \global\long\def\calMhjpfhI{{\calMh}_{j+1} \left ( \left \{\bffh_1\right \} \right)}
+  % Mh{j+1}(fh2)
+  \global\long\def\calMhjpfhII{{\calMh}_{j+1} \left ( \left \{\bffh_2\right \} \right)}
+  
+  % Mh_{j-1}(fhl)
+  \global\long\def\calMhjnfhl{{\calMh}_{j-1} \left ( \left \{\bffh_l\right \} \right)}
+  % Mh{j-1}(fh0)
+  \global\long\def\calMhjnfho{{\calMh}_{j-1} \left ( \left \{\bffh_0\right \} \right)}
+  % Mh{j-1}(fh1)
+  \global\long\def\calMhjnfhI{{\calMh}_{j-1} \left ( \left \{\bffh_1\right \} \right)}
+  % Mh{j-1}(fh2)
+  \global\long\def\calMhjnfhII{{\calMh}_{j-1} \left ( \left \{\bffh_2\right \} \right)}
+  
+  
+  % Mh1(fh1)
+  \global\long\def\calMhIfhI{{\calMh}_1 \left ( \left \{\bffh_1\right \} \right)}
+  % Mh3(fh1)
+  \global\long\def\calMhIIIfhI{{\calMh}_3 \left ( \left \{\bffh_1\right \} \right)}

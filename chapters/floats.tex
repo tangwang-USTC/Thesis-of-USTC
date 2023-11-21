@@ -1,0 +1,1264 @@
+% !TeX root = ../main.tex
+
+\chapter{Vlasov-Fokker-Planck方程}
+\label{Vlasov-Fokker-Planck方程}
+
+  等离子体的物理状态可用关于物理空间位矢 $\r$、速度空间 $\v$ 与时间 $t$ 的分布函数来描述。对于组分$a$有 $f=f \left(\r_a,\v,t \right)$ ，并且其系统状态随时间的演化服从 Boltzmann 方程\cite{Boltzmann1872,Boltzmann1966}。对于全电离等离子体，分布函数演化常用\textbf{多组分Vlasov-Fokker-Planck（VFP）方程}\cite{}来描述；其中，组分$a$的分布函数满足
+  \begin{eqnarray}
+      \ddt{f} + \v \cdot \nabla{f} + \frac{q_a}{m_a} \left(\bfE + \v \times \bfB \right) \cdot \ddbfv f &=& \cola ~.\label{VFP}
+  \end{eqnarray}
+  其中，$\nabla$、$\bfE$与$\bfB$分别是空间梯度算符、空间电场与磁感应强度；参量$q_a$与$m_s$是$a$类粒子的电荷数与质量。上述方程等号左边为描述平均场效应的Vlasov部分。左边第二项代表物理空间梯度引起的对流项；第三项描述由于平均电磁场（包含自洽场）对带电粒子产生的加速效应在速度空间引起的扩散。方程\EQ{VFP}等号右边为组分$a$粒子受到的总碰撞效应项，包括由于自身粒子引起的自碰撞效应以及与背景组分粒子之间的互碰撞效应。方程\EQ{VFP}描述的通常是一个3D-3V维多组分非线性动理学模型。
+  
+  方程\EQ{VFP}中电磁场的演化遵从 \textbf{Maxwell方程组}
+  \begin{eqnarray}
+      \nabla \times \bfE &=& - \ddt \bfB, \label{dtB} \\
+      \nabla \times \frac{\bfB}{\mu} &=& - \varepsilon \ddt \bfE + \bfJ, \label{dtE} \\
+      \nabla \cdot \bfE &=& \frac{\rho_q}{\varepsilon}, \label{DE} \\
+      \nabla \cdot \bfB &=& 0 ~.\label{DB}
+  \end{eqnarray}
+  其中，$\varepsilon$与$\mu$分别代表等离子体介电常数与磁感应常数。\textbf{电荷密度}与\textbf{电流密度}分别是
+  \begin{eqnarray}
+      \rho_q \left(\r,t \right) &=& \sum{_{a=1}^{N_s}} \left(q_a n_a \right), \\
+      \bfJ \left(\r,t \right) &=& \sum{_{a=1}^{N_s}} \left(q_a n_a \ua \right)~.\label{rhoJ}
+  \end{eqnarray}
+  常数$N_s \in \bbN^+$表示等离子体中组分的数量。粒子数密度$n_a=\int f \rmd \v$与平均速度$\ua=\int \v f \rmd \v$是分布函数的前两阶速度矩。方程\EQ{VFP}-\EQ{DB} 组成\textbf{多组分Maxwell-Vlasov-Fokker-Planck（MVFP）系统}，共同描绘多组分等离子体的自洽演化。
+  
+  VFP方程中Vlasov部分描述系统空间非均匀效应以及宏观电磁场对带电粒子的加速效应。当系统特征时间远小于Coulomb碰撞时间或者系统特征长度远小于粒子平均自由程时碰撞效应可忽略，如空间等离子体与磁约束聚变等离子体中远小于弛豫时间的问题，此时VFP方程退化为描述平均场效应的\textbf{Vlasov方程}，即
+  \begin{eqnarray}
+      \ddt{f} + \v \cdot \nabla{f} + \frac{q_a}{m_a} \left(\bfE + \v \times \bfB \right) \cdot \ddbfv f &=& 0 ~.\label{Vlasov}
+  \end{eqnarray}
+  当平均场效应可忽略时，如无电磁场的空间均匀等离子体，则VFP方程退化为\textbf{Fokker-Planck（FP）碰撞项方程}，
+  \begin{eqnarray}
+      \ddt{f} &=& \cola ~.\label{FP}
+  \end{eqnarray}
+  碰撞项$\cola$表示组分$a$受到的所有组分的总Coulomb碰撞效应，即
+  \begin{eqnarray}
+      \cola \left(\r_a,\v,t \right) &=& \sum{_{b=1}^{N_s}} \colab ~.\label{cola}
+  \end{eqnarray}
+  其中，$\colab$表示等离子体测试粒子组分$a$与背景场粒子组分$b$之间的Coulomb碰撞效应，记为\textbf{互碰撞算子}。记$a$与$b$相同时为\textbf{自碰撞算子}，即
+  \begin{eqnarray}
+      \colaa \left(\r_a,\v,t \right) &=& \delta_{ab} \colab ~.\label{colaa}
+  \end{eqnarray}
+  式中$\delta_{ab}$为Kronecker符号。
+  
+  碰撞算子$\colab$由各种碰撞模型理论描述\cite{Thomas2012,Liu2011}。基于分子混沌假设并采用两体碰撞近似可得著名的\textbf{Boltzmann碰撞算子}\cite{Landau1937}，
+  \begin{eqnarray}  
+      \colab & = & \int \left({f'} {F'} - f F \right) 
+      u \sigma (u,\theta) \rmd \Omega \rmd^3 \vb ~.\label{BoltzmannCollision}
+  \end{eqnarray}
+  基于小角Coulomb散射假设，Landau从Boltzmann方程给出了$\colab$积分形式的表述，即
+  \begin{eqnarray}
+      \colab  \ = \ \ddbfv \cdot \frac{\Gamma_{ab}}{2} \int \left( \frac{\olraI}{\left|\u \right|} -\frac{\u \u}{\left|\u \right|^3} \right) \left[\frac{f(\v)}{m_b} \ddbfvb F(\vb) - \frac{F(\vb)}{m_a} \ddbfv f(\v) \right] \rmd^3 \vb ~.\label{FPL}
+  \end{eqnarray}
+  其中，$\u=\u_a-\u_b$；$\Gab$是Coulomb对数的函数，即
+  \begin{eqnarray}
+    \Gab\left(\r_a,t \right) &=& 4 \pi \left(\frac{q_a q_b}{4 \pi \varepsilon m_a} \right)^2 \lnAab ~. \label{Gab}
+  \end{eqnarray}
+  方程\EQ{FPL}即为著名的\textbf{Fokker-Planck-Landau（FPL）碰撞算子}。当系统分布偏离热力学平衡态不远时，线性化算子\textbf{BGK（P. L. Bhatnagar, E. P. Groos, M. Krook）碰撞项}\cite{BGK1954}可极大的简化碰撞项的复杂性，
+  \begin{eqnarray}
+    \colha \left(\r_a,t \right) &=& - \nu_c (f - f_0) = - \frac{f - f_0}{\tau_c} ~. \label{BGk}
+  \end{eqnarray}
+  式中$\nu_c$为组分$a$粒子平均碰撞频率；$\tau_c$为系统特征时间，通常以平均碰撞时间表征系统从初始非平衡态趋向于平衡态的弛豫时间。BGK碰撞算子（或称\textbf{Krook碰撞算子}）即为\textbf{弛豫时间碰撞模型}。
+  
+  采用两体Coulomb散射假设并对原始Fokker-Planck方程（文献）做Taylor展开并做二阶截断，Rosenbluth 给出了描述带屏蔽效应的小角Coulomb 散射的碰撞算子（文献1957），即
+  \begin{eqnarray}
+      \colab  \left(\r_a,\v,t \right) &=& - \ddbfv \cdot \left[f \Gab \ddbfv \HF \right] + \frac{1}{2} \ddbfv \ddbfv : \left[f \Gab \ddbfv \ddbfv \GF \right] ~. \label{RFP}
+  \end{eqnarray}
+  上述碰撞项形式为描述速度空间中对流-扩散（advection-diffusion）效应的带Rosenbluth势的Fokker-Planck碰撞项，通常记为\textbf{Rosenbluth-Fokker-Planck（RFP）碰撞算子}。RFP碰撞算子满足质量、动量与能量三大守恒定律\cite{Liboff1967}，且当描述不考虑相对论效应\cite{Braams1987}的Coulomb碰撞效应\cite{Arsen'ev1991,DEGOND1992}时与FPL碰撞算子具有等价性\cite{Hazeltine2018}。
+  
+  方程\EQ{RFP}中$\HF $与$\GF$是Rosenbluth引入的速度空间势函数，即Rosenbluth势。二者是背景分布函数$F \left(\r_b,\v,t \right)$的积分函数，
+  \begin{eqnarray}
+    \HF &=& \int \frac{1}{\rmv_{ab}} F\left(\r_b,\v_b,t \right) \rmd \v _b, \\
+    \GF &=& \int \rmv_{ab} F\left(\r_b,\v_b,t \right) \rmd \v _b ~. \label{HG}
+  \end{eqnarray}
+  上式中相对速率$\rmv_{ab}=\left|\v-\v_b \right|$以及张量运算满足$A\bfx:B\bfy=\left(\bfx \cdot B \right)\left(A \cdot \bfx \right)$。
+  Rosenbluth势函数满足\textbf{速度空间Poisson方程}；对于单一背景分布函数等离子体有
+  \begin{eqnarray}
+      \nabla{_\v^2} \HF &=& - 4 \pi F\left(\r_b,\v,t \right), \\
+      \nabla{_\v^2} \GF &=& 2 \HF ~. \label{possionHG}
+  \end{eqnarray}
+
+  RFP碰撞算子\EQ{RFP}可以改写如下散度形式
+  \begin{eqnarray}
+      \colab \left(\r_a,\v,t \right) &=& \Gab \ddbfv \cdot \left[\left(\ddbfv \ddbfv \GF \right) \cdot \ddbfv f - m_M f \ddbfv \HF \right]  ~. \label{FPD}
+  \end{eqnarray}
+  其中，$m_M=m_a/m_b$。记上述形式为\textbf{Fokker-Planck in Divergence form (FPD)碰撞算子}。对于自碰撞过程（like-particle collision），上述方程可表述为\cite{Chacon2000}
+  \begin{eqnarray}
+      \colab \left(\r_a,\v,t \right) &=& \Gab \ddbfv \cdot \ddbfv \cdot \left[\scrT[H,H] + \left(\ddbfv \ddbfv \GF \right) f \right]  ~. \label{FPT}
+  \end{eqnarray}
+  式中函数$\scrT[H,H]$为张量算符\cite{Chacon2000}
+  \begin{eqnarray}
+      \scrT[H,H] &=& \frac{1}{8 \pi} \left[\ddbfv H \ddbfv H - \frac{\olra{I}}{2} \left(\ddbfv H \right)^2 \right]  ~. \label{THH}
+  \end{eqnarray}
+  方程\EQ{FPT}即所谓\textbf{张量Fokker-Planck碰撞算符}，记为\textbf{FPT}。
+
+  约化Fokker-Planck算子（reduced-FP operator）\cite{Taitano2015II}
+  \begin{eqnarray}
+      \colab \left(\r_a,\v,t \right) &=& \nu_{ab} \left \{ \ddbfv \cdot  \left[\left(\v - \ub \right) f \right] + D_{ab}  \ddbfv \cdot  \ddbfv f \right \}  ~. \label{reduced-FP}
+  \end{eqnarray}
+  其中，$\nu_{ab}$与$D_{ab}$分别是组分$a$与组分$b$的碰撞频率及速度空间扩散系数。
+  
+  漂移扩散近似，
+  记Fokker-Planck in drift-diffusion form（FPDD）
+
+  对于$e-i$碰撞，当电子特征速度远大于离子速度时，Lorentz假设离子碰撞前后速度不变，此时有
+  \begin{eqnarray}
+       \colei \left(\r_i,\v,t \right) &=& Z_{eff} \frac{\nu_{ei} \gamma}{(m_e \rmv)^3} \left[\frac{1}{2} \frac{\partial}{\partial \mu} \left(1 - \mu^2 \right)  \frac{\partial}{\partial \mu} f \right]  ~. \label{Lorentz}
+  \end{eqnarray}
+  此即为Lorentz碰撞模型\cite{Stahl2017}。
+  
+  特别地，对于$i-e$碰撞，当背景分布函数是以密度$n_e$、平均速度$\u_e$与动理学温度$T_e$为特征参量的漂移Maxwellian分布时，以$\epsilon = (m_e / m_i)^{1/2} \approx 0.022$为小量做展开近似可得
+  \begin{eqnarray}
+       \colie \left(\r_i,\v,t \right) &=& \frac{1}{\tau_{ei}} \ddbfv \cdot \left[\left(\v - \u_e \right) f + \frac{T_e}{m_i} \ddrmv f \right]  ~. \label{FPDieFDM}
+  \end{eqnarray}
+  其中，特征弛豫时间
+  \begin{equation}
+      \colie \tau_{ei} = \frac{3}{4 \sqrt{2 \pi} e^4} \frac{m_i T_e^{3/2}}{Z_i^2 n_e m_e^{1/2} \ln{\Lambda_{ie}}}
+  \end{equation}
+  当离子速度远大于电子平均速度（如聚变产生高能的$\alpha$粒子），动力学摩擦项远大于上述方程右边第二项，则方程\EQ{FPDieFDM}近似为
+  \begin{eqnarray}
+       \left(\r_i,\v,t \right) &=& \frac{1}{\tau_{ei}}  \frac{1}{\rmv^2} \ddrmv \cdot \left(\rmv^3 f \right)  ~. \label{FPDieFM}
+  \end{eqnarray}
+  
+  应用方程\EQ{possionHG}，Shkarofsky \cite{Shkarofsky1967,Shkarofsky1963}给出了RFP碰撞算子\EQ{RFP}的一种等价的对称形式，数学上为标准对流扩散方程（advection-diffusion equation）形式
+  \begin{eqnarray}
+      \colab = 4 \pi m_M F f + \left(1-m_M \right) \ddbfv \HF \cdot \ddbfv f + \frac{1}{2} \ddbfv \ddbfv \GF : \ddbfv \ddbfv f ~. \label{FPS}
+  \end{eqnarray}
+  记上述碰撞项形式为\textbf{Fokker-Planck-Shkarofsky (FPS) 碰撞算子}。
+  
+  相比于其他Fokker-Planck碰撞算子，积分形式的FPL碰撞算子\EQ{FPL}可以方便地证明质量、动量与能量守恒定律（文献）以及导出Boltzmann的\textbf{$H$定理}（文献）。然而带Rosenbluth势形式的Fokker-Planck碰撞算子（RFP\EQ{RFP}、FPD\EQ{FPD}与FPS\EQ{FPS}）通常比FPL算子容易构造具有更高计算效率的数值算法。FPS碰撞算子\EQ{FPS}显示地给出了带Rosenbluth势的Fokker-Planck碰撞项保留了描述两体、小角Coulomb碰撞过程中速度空间的二阶效应。采用FPS碰撞算子，VFP方程从四阶偏微分方程等价转化为一个二阶偏微分方程形式。这将有助于构造更高效、稳定的数值算法。无特别说明时，本文后续Fokker-Planck碰撞项皆采用FPS碰撞算子\EQ{FPS}。
+ 
+\section{VFP方程归一化}
+\label{VFP方程归一化}
+
+  理论上，VFP方程能够描述统计物理范畴的任意分布函数的演化，包含同时存在电磁场以及两体小角散射效应的非线性动理学现象。然而，由于VFP方程\EQ{VFP}是一个六维空间的含时高阶非线性偏微分方程，在理论上与数值上对其求解仍然是巨大的挑战\cite{Heikkinen2007}。另一方面，等离子体中通常存在显著的质量差异（电子与离子）以及温度差异（聚变等离子体中燃料离子与聚变反应产物离子），使得等离子体不同组分的分布函数在速度空间的有效区间具有差异性。这种差异性进一步提高了数值求解VFP方程的难度。
+
+\subsection{无量纲化}
+\label{无量纲化}
+
+  合理无量纲化，通常使得对偏微分方程的理论分析与数值求解具有多方面优势。通过把质量、时间、电荷量、速度与物理空间位置分别用参考质量 $\Da$、特征时间 $\tau_0$、单位电荷量 $e$ 、真空中光速 $c_0$ 与初始时刻等离子体趋肤深度 $k_{p_0} = c_0 \tau_0$ 做归一化，并且数密度、电场、电磁感应强度、电荷密度及电流密度$(n_a,\bfE,\bfB,\rho_q,\bfJ)$分别用$(n_0,c_0 \tau_0^{-1} \Da/e,\tau_0^{-1} \Da/e,n_0 e, c_0 n_0 e)$做归一化。MVFP系统中其他量根据与上述量之间的关系以及量纲分析给出对应无量纲形式。
+  
+  此刻开始，除了用于归一化的常数$D_a$、$e$等基本常数以及特殊说明情形，所有表达式中的参数都代表无量纲化的量。经过化简给出无量纲化的\textbf{Maxwell-Vlasov-Fokker-Planck系统}
+  \begin{eqnarray}
+      \ddt{f} + \v \cdot \nabla{f} + \frac{Z_a}{m_a} \left(\bfE + \v \times \bfB \right) \cdot \ddbfv f = \cola  ~.\label{VFPd}
+  \end{eqnarray}
+  以及
+  \begin{eqnarray}
+      \ddt \bfB &=& - \nabla \times \bfE, \label{dtBd} \\
+      \ddt \bfE &=&  \frac{1}{\mur \varepsr} \nabla \times \bfB- \frac{1}{\varepsr} \bfJ, \label{dtEd} \\
+      \nabla \cdot \bfE &=& \frac{\rho_q}{\varepsr}, \label{DEd}\\
+      \nabla \cdot \bfB &=& 0 ~.\label{DBd}
+  \end{eqnarray}
+  其中，$Z_a$、$\varepsr$与$\mur$分别是粒子$a$的电荷数、等离子体相对介电常数以及相对磁导率。对应\textbf{电荷密度}与\textbf{电流密度}为
+  \begin{eqnarray}
+      \rho_q \left(\r,t \right) &=& \sum{_{a=1}^{N_s}}  \left(Z_a n_a \right), \\
+      \bfJ \left(\r,t \right) &=& \sum{_{a=1}^{N_s}} \left(Z_a n_a \u \right)~.\label{rhoJhd}
+  \end{eqnarray}
+  无量纲化的\textbf{碰撞项}为
+  \begin{eqnarray}
+      \cola \left(\r_a,\v,t \right) = C_{\Gamma} \sum{_{b=1}^{N_s}} \colab~.\label{FPda}
+  \end{eqnarray}
+  
+  方程\EQ{FPda}中由于无量纲化产生的常系数为
+  \begin{equation}
+      C_{\Gamma}= \frac{\tau_0 \opo^4}{n_0 c_0^3} ~. \label{CGamma}
+  \end{equation}
+  特别地，当时间采用等离子体电子组分特征频率的倒数归一化时， 有
+  \begin{equation}
+      C_{\Gamma}= \frac{\opo^3}{n_0 c_0^3} ~. \label{CGammawp}
+  \end{equation}
+  其中，$\opo\approx \ope=\sqrt{{n_e {e^2}} / \left(\Da \varepsilon_0 \right)}$。
+  当时间用国际单位秒做归一化时，上述常系数对应为
+  \begin{equation}
+      C_{\Gamma}= n_0 \frac{\mu_0}{\varepsilon_0 c_0} \frac{e^4}{D_a^2}  ~. \label{CGammatd}
+  \end{equation}
+  类似地，国际单位制中的VFP方程\EQ{VFP}可看做碰撞项中常系数$C_{\Gamma}=1$。则无量纲化的MVFP方程组\EQ{VFPd}-\EQ{FPda}与原方程组\EQ{VFP}-\EQ{DB}具有形式一致性。
+
+  \subsection{速度空间归一化}
+  \label{速度空间归一化}
+  
+  针对等离子体不同组分的分布函数主要特征区间在速度空间的分布差异性，一种有效的改善方法是使用归一化处理。分布函数对应的速度空间用其本地热速度做归一化,
+  \begin{equation}
+      \vh=\v / \vath ~. \label{vh}
+  \end{equation}
+  从而有
+  \begin{eqnarray}
+      \ddbfvh &=& \vath \ddbfv,  \\
+      \fh \left(\r_a,\vh,t \right) &=& n_a^{-1} \vath^3 f \left(\r_a,\v,t \right) ~. \label{fh}
+  \end{eqnarray}
+  此时，关于归一化分布函数的\textbf{3D-3V维多组分VFP模型}\EQ{VFPd}可以表述为
+  \begin{eqnarray}
+      \ddt \navthf + \vath \vh \cdot \nabla{\navthf} + \navth \frac{Z_a}{m_a} \left(\frac{\bfE}{\vath} + \vh \times \bfB \right) \cdot \ddbfvh {\fh} = \navth \colha ~.\label{VFPhd}
+  \end{eqnarray}
+  上述方程中归一化的碰撞项与非归一化形式满足关系
+  \begin{eqnarray}
+      \colha \left(\r_a,\vh,t \right) &=& n_a^{-1} \vath^3 \cola ~.\label{colhacola}
+  \end{eqnarray}
+  对应的 Maxwell方程组\EQ{dtBd}-\EQ{DBd}保持形式不变；其中电流密度可以表述为
+  \begin{eqnarray}
+      \bfJ \left(\r,t \right) &=& \sum_a \left(Z_a n_a \vath \uh_a \right)~.\label{rhoJh}
+  \end{eqnarray}
+  归一化平均速度$\uha = \int \vh \fh \rmd \vh$。
+  
+  无量纲化后的\textbf{归一化多组分FPS碰撞}项可以表述为
+  \begin{eqnarray}
+      \colha \left(\r_a,\vh,t \right) &=& \sum_{b=1}^{N_s} \nbvth \Gabh \colhab \label{FPShda}
+  \end{eqnarray}
+  其中，
+  % \begin{eqnarray}
+  %     \Gabh &=& C_{\Gamma} 4 \pi \left(\frac{Z_a Z_b}{4 \pi m_a} \right)^2 \lnAab ~. \label{Gabh}
+  % \end{eqnarray}
+  \begin{eqnarray}
+      \Gabh \left(\r_a,t \right) &=& C_{\Gamma} \times 4 \pi \left(\frac{Z_a Z_b}{4 \pi \varepsilon_r m_a} \right)^2 \lnAab ~. \label{Gabh}
+  \end{eqnarray}
+  描述两种组分的\textbf{归一化FPS碰撞}项为
+  \begin{eqnarray}
+      \colhab \left(\r_a,\vh,t \right) =  \CFh \Fh \fh + \CHh \ddvvbth \HFh \cdot \ddbfvh \fh + \CGh \ddvvbth \ddvvbth \GFh : \ddbfvh \ddbfvh \fh ~. \label{FPShdab}
+  \end{eqnarray}
+  方程\EQ{Gabh}中由于无量纲化产生的常系数$C_{\Gamma}$由方程\EQ{CGamma}给出。合理选择无量纲化参数 $\opo$、$c_0$ 与 $n_0$的值 可使得$C_{\Gamma}$等于单位一，从而能够消去VFP方程无量纲化过程中产生的常系数。归一化的FPS碰撞算子\EQ{FPShdab}右边三个系数分别为
+  \begin{eqnarray}
+      \CFh=4\pi m_M,  \quad  
+      \CHh=\left(1-m_M \right) \vbth / \vath, \quad 
+      \CGh=\left(\vbth / \vath \right)^2 / 2
+      ~. \label{CFHGh}
+  \end{eqnarray}
+  函数$\Fh=\Fh\left(\r_b,\vvbth,t \right)$是背景分布函数映射到组分$a$速度空间上的归一化形式。除特殊声明之外，本节之后的研究皆基于无量纲化的MVFP谱方程\EQ{VFPhd}$-$\EQ{FPShdab}。
+ 
+
+\section{VFP谱方程}
+\label{VFP谱方程}
+
+  数学角度，VFP方程是六维（3D-3V）含时演化非线性偏微分方程；物理层面，VFP方程描述了等离子体中非线性非平衡统计热力学的演化。对其分析、求解是物理以及数学上的一个巨大挑战。然而，带电粒子间的Coulomb碰撞总是使得等离子体系统总是趋向于各向异性度较小的的状态演化，从而使得系统在速度空间有较好的对称性。利用对称性研究系统性质、提取系统宏观信息是非线性非平衡统计热力学的一个重要方向。
+
+  本节将在速度空间应用谱分析方法对VFP方程进行角度方向的正交离散分解。目前笛卡尔张量标量积（Cartesian tensor scalar product， CTSP）与球谐函数展开（Spherical harmonic expansions, SHE）（文献1960）是两种被系统研究并广泛应用的展开策略。上述两种展开基函数都是电子-离子间距角散射碰撞算子的本征函数，也是磁场中带电粒子旋转的自然基。文献（1960）证明了这两种用级数项取代角维度的展开方法在理论上的等价性。应用谱展开方法，一个三维速度空间简化为一个一维速度轴和无限级数组成的谱空间。通常，上述展开在数学上是一个收敛级数；并且当统计系统各向异性越小时收敛越快。因此，保留有限阶截断使得理论上能以合理的精度描述相关的物理效应(以集体效应为主大的等离子体)。这将大大减少数值分析所需的计算量，但仍然保留了速度相空间的三维性质。
+  
+  当统计系统具有显著的笛卡尔特征（Cartesian features），比如双束不稳定性问题，笛卡尔直接离散方法、Hermite多项式展开或者PIC算法是首选方法。当统计系统碰撞效应不可忽略、或者无显著的笛卡尔特征时，球谐函数展开法是更高效的方法。球谐函数具有正交归一性，其不同阶振幅具有独特对称性，并且高阶振幅具有自然截断特性（取足够阶之后的残余部分是小量）。此特性使得用球谐函数对VFP方程展开来研究聚变等离子体中动理学效应、提取统计系统信息成为自然而然的选择。球谐函数展开通常是非线性过程，使得其理论复杂且难以数值处理；然而正如物理学诸多分支（如量子力学）表明球谐函数是3D空间角度方向的自然基矢。
+  
+  相比于CTSP方法，SPE由于可以应用等离子体系统隐含的先验信息（如对称性、分布函数边界条件等），从而提高计算效率并降低计算资源需求。本文在速度空间角度方向采用球谐函数展开法。无特别说明时，本文假设电磁场与有所有等离子体组分有共同的物理坐标，并记为$\r=\r \left(x,y,z \right)$。
+   
+   记$\calAh$、$\calEh$ 与 $\calBh$ 分别代表组分 $a$的分布函数演化过程中空间对流项、电场扩散项与磁场扩散项，分别为
+   \begin{eqnarray}
+       \calAh \left(\r,\vh,t \right) &=& - \vthna \vath \vh \cdot \nabla{\navthf},\label{VFPA} \\
+       \calEh \left(\r,\vh,t \right) &=& - \frac{Z_a}{m_a} \frac{\bfE}{\vath} \cdot \ddbfvh {f}, \label{VFPE} \\
+       \calBh \left(\r,\vh,t \right) &=& - \frac{Z_a}{m_a} \left(\v \times \bfB \right) \cdot \ddbfvh {f} ~. \label{VFPB}
+   \end{eqnarray}
+   则\textbf{3D-3V维多组分VFP方程}\EQ{VFPhd}可简记为
+   \begin{eqnarray}
+       \vthna \ddt \navthf &=& \calAh + \calEh + \calBh + \colha~. \label{VFPhdAEBC}
+   \end{eqnarray}
+   应用定理\ref{定理-球谐函数展开}，分布函数用球谐函数展开形式为
+  \begin{eqnarray}
+      f \left(\r,\v,t \right) &=& \sumloq \sumlnl \flm \left(\r, \rmv ,t \right) \Ylm \left(\mu, \phi \right) ~. \label{fsph}
+  \end{eqnarray}
+  给定各向异性度（温度及平均速度等），选择足够大的最大阶阶数$l_M$可保证分布函数的收敛性。Coulomb碰撞效应总是趋向于第$(l,m)$阶振幅$\flm$以速率$\gamma_d = l(l+1)/v^3$衰减；也就是说，由于Coulomb碰撞分布函数总是趋向于各向同性，最大阶阶数$l_M$自发地减小并趋向于$1$。
+  
+   把方程\EQ{fsph}代入方程\EQ{VFPA} - \EQ{VFPB}，应用定理\EQ{定理-球谐函数展开}可得空间对流项、电场扩散项与磁场扩散项等用球谐函数展开形式
+  \begin{eqnarray}
+      \calAh \left(\r,\vh,t \right) &=& \sumloq \sumlnl \Ahlm \left(\r, \rmvh,t \right) \Ylm \left(\mu, \phi \right) , \label{Asp} \\
+      \calEh \left(\r,\vh,t \right) &=& \sumloq \sumlnl \Ehlm \left(\r, \rmvh,t \right) \Ylm \left(\mu, \phi \right), \label{Esp}  \\
+      \calBh \left(\r,\vh,t \right) &=& \sumloq \sumlnl \Bhlm \left(\r, \rmvh,t \right) \Ylm \left(\mu, \phi \right) \label{Bsp} ~. 
+  \end{eqnarray}
+  上述方程中，展开系数$\Ahlm$、$\Ehlm$ 与 $\Bhlm$ 分别代表VFP方程空间对流项、电场扩散项与磁场扩散项的第$\left(l,m \right)$阶展开系数。由于分布函数满足性质\EQ{flmconj}，可证方程\EQ{Asp} - \EQ{Bsp}中的$\left(l,m=0 \right)$阶系数满足
+   \begin{equation}
+       \left(X_l^0 \right)^* \ = \ X_l^0,\ \ \ X\in \left[\calAh,\calEh,\calBh \right] ~. \label{Xlmconj}
+   \end{equation}
+  把方程\EQ{fhsph}代入VFP方程\EQ{VFPhdAEBC}，在物理空间采用笛卡尔坐标系，即$\r=\r \left(x,y,z \right)$,并利用球坐标系与笛卡尔坐标系相互转换关系（附录）及复函数定义，经过合并同类项，化简可得谱空间中\textbf{3D-3V维多组分VFP谱方程组}(文献)。其中，\textbf{第$\left(l,m \right)$阶多组分VFP谱方程}为
+   \begin{eqnarray}
+       \vthna \ddt \navthflm &=& \Ahlm + \Ehlm + \Bhlm + \colhlma ~.  \label{VFPhlmdAEBC}
+   \end{eqnarray}
+   其中，参数$l \in [0, \bbN^+]$以及整数$-l \le m \le l$；函数$\colhlma$是第$\left(l,m \right)$阶用$n_a/\vath^3$归一化的碰撞项振幅；其具体形式见第\SEC{归一化FPS碰撞算子的球谐函数展开}节。函数$\Ahlm$、$\Ehlm$与$\Bhlm$分别是第$\left(l,m \right)$阶用$n_a/\vath^3$归一化的空间对流项、电场扩散项与磁场扩散项。
+
+\subsection{空间对流项}
+\label{空间对流项}
+
+  由于分布函数在物理空间不均匀性引起的对流项的第$\left(l,m \right)$阶归一化振幅为
+  \begin{eqnarray}
+      \Ahlm \left(\r,\rmvh,t \right) & = & - \vthna \left ( {\Alm}_{xy} + {\Alm}_z \right ) ~. \label{Ahlm}
+  \end{eqnarray}
+  对于各向异性项，$m \ge 1$，有 
+  \begin{eqnarray}
+  \begin{aligned}
+        {\Alm}_{xy} \ = \ & 
+         \vath \rmvh \left(\ddx - i \ddy \right) \left[\navth \left( \CAlnmn \fhlnmn + \CAlpmn \fhlpmn  \right) \right]  
+         \\
+          + & \vath \rmvh \left(\ddx + i \ddy \right) \left[\navth \left( \CAlnmp \fhlnmp + \CAlpmp \fhlpmp  \right) \right] , \label{Almxy} \\
+        {\Alm}_{z} \ = \ & \vath \rmvh \ddz \left[\navth \left( \CAlnm \fhlnm + \CAlpm \fhlpm  \right) \right] ~.  \label{Almz}
+  \end{aligned}
+  \end{eqnarray}
+  
+  33333333333333333333333333333333333333333333333333
+  
+  其中,等号中右边系数见附录（）。满足关系\EQ{Xlmconj}约束的第$\left(m=0 \right)$项系数为
+  \begin{eqnarray}
+        {\Al}_{xy} & = & \vath
+         \rmvh \R \left\{ \left(\ddx + i \ddy \right) \left[\navth \left(2 \CAlnI \fhlnI + 2 \CAlpI \fhlpI  \right) \right] \right \}  , \label{Alxy} 
+  \end{eqnarray}
+  特别地，当$m \equiv 0$，有
+  \begin{eqnarray}
+        {\Ah}_l^{m \equiv 0} \left(\r,\rmvh,t \right) & = & - \vthna \vath \rmvh \ddz  \left(\navth \CAlpo \fhlpo  \right) ~. \label{Ao}
+  \end{eqnarray}
+  
+  
+\subsection{电场扩散项}
+\label{电场扩散项}
+
+  由于物理空间宏观电场引起的扩散效应的第$\left(l,m \right)$阶归一化振幅为
+  \begin{eqnarray}
+      \Ehlm \left(\r,\rmvh,t \right) &=& - \Zma \left( {\Elm}_{xy} + {\Elm}_z  \right) ~. \label{Ehlm}
+  \end{eqnarray}
+  定义函数
+  \begin{eqnarray}
+      \calGhlm \left(\rmvh \right) &=& \rmvh^l \ddrmvh \left(\rmvh^{-l} \fhlm \right), \label{calGhlm} \\ \calHhlm \left(\rmvh \right) &=& \frac{1}{\rmvh^{l+1}} \ddrmvh \left(\rmvh^{l+1} \fhlm \right) ~. \label{calHhlm}
+  \end{eqnarray}
+  则第$\left(l,m\ge 1 \right)$阶电场扩散项分量可表述为
+  \begin{eqnarray}
+  \begin{aligned}
+        {\Elm}_{xy} \ = \ & 
+        \frac{E_x - i E_y}{\vath} \left( \CElnmn \calGhlnmn + \CElpmn \calHhlpmn \right) \\
+        + & \frac{E_x + i E_y}{\vath} \left( \CElnmp \calGhlnmp + \CElpmp \calHhlpmp \right)  , \label{Elmxy} \\
+        {\Elm}_z \ = \ & \frac{E_z}{\vath} \left(\CElnm \calGhlnm + \CElpm \calHhlpm \right) ~.  \label{Elmz}
+  \end{aligned}
+  \end{eqnarray}
+  44444444444444444444444444444444444444444444444
+  
+  等号中右边系数见附录（）。满足关系\EQ{Xlmconj}约束的第$\left(m=0 \right)$项系数为
+  \begin{eqnarray}
+        {\El}_{xy} & = & 
+        \R \left[ \frac{E_x + i E_y}{\vath} \left( 2 \CElnI \calGhlnI + 2 \CElpI \calHhlpI \right) \right] ~. \label{El}
+  \end{eqnarray}
+  特别地，当$m \equiv 0$，有
+  \begin{eqnarray}
+        {\Eh}_l^{m \equiv 0} &=& - \Zma \frac{E_z}{\vath} \CElpo \calHhlpo ~. \label{Eo}
+  \end{eqnarray}
+  
+  \subsection{磁场扩散项}
+\label{磁场扩散项}
+
+  由于物理空间宏观磁场引起的扩散效应的第$\left(l,m \right)$阶归一化振幅为
+  \begin{eqnarray}
+      \Bhlm \left(\r,\rmvh,t \right) &=& \Zma \Blm  ~. \label{Bhlm}
+  \end{eqnarray}
+  其中，$m \ge 1$阶振幅为 
+  \begin{eqnarray}
+        \Blm \ = \ \CBlm \left(i B_z \right) \fhlm + \CBlmn \left(B_y + i B_x \right) \fhlmn + \CBlmp \left(B_y - i B_x \right) \fhlmp ~. \label{Blm}
+  \end{eqnarray}
+  满足关系\EQ{Xlmconj}约束的第$\left(m=0 \right)$项系数为
+  \begin{eqnarray}
+        \Bl \left(\r,\rmvh,t \right) &=&  \R \left[2 \CBlI \left(B_y - i B_x \right) \fhlI \right ] ~. \label{Bl}
+  \end{eqnarray}
+  特别地，当$m \equiv 0$时，有$\Bhl \equiv 0$。
+
+  当等离子体系统在速度空间具有轴对称性时，谱空间中$m \equiv 0$。则速度空间轴对称的等离子体系统可用\textbf{1D-2V维多组分VFP谱方程}描述，其第$(l,0)$阶谱方程为
+   \begin{eqnarray}
+       \vthna \ddt \navthfl &=& {\Ah}_l^{m \equiv 0} + {\Eh}_l^{m \equiv 0} + {\frakCh{_l^{m\equiv0}}}_a ~.  \label{VFPhldAEBC}
+   \end{eqnarray}
+   特别地，当速度空间具有球对称性，谱空间中$l=m \equiv 0$；其磁场扩散性恒为零。则等离子体系统可用\textbf{0D-1V维多组分VFP谱方程}描述
+   \begin{eqnarray}
+       \vthna \ddt \navthfo &=& \colhoa ~.  \label{VFPhodAEBC}
+   \end{eqnarray}
+  对于空间梯度与宏观电磁场效应可忽略的系统，其归一化分布函数的第$(l,m)$阶振幅随时间的演化方程可表示为
+  \begin{eqnarray}
+      \ddt \fhlm = \colha_l^m + \left(3 \Rdtvath - \Rdtna \right) \fhlm ~.\label{dtfhlmd}
+  \end{eqnarray}
+  
+\section{动理学矩}
+\label{动理学矩}
+
+  在平衡态热力学中，密度、平均速度、总能量、温度与粘滞张量等状态参量给出了统计系统清晰的宏观物理特征信息。在统计热力学中，这些状态参量可以用分布函数的速度矩积分来定义；其含义延展为动理学状态参量。
+\begin{definition} \label{定义-速度矩}
+  分布函数的第$s$阶\textbf{速度矩}为
+  \begin{equation}
+      \bfM_s \left(\r,t \right) \ = \ \calC_s \int \left \{\v \right \}_s f \left(\r,\v,t \right) \rmd \v ~. \label{Ms}
+  \end{equation}
+  其中，参数$s \in [0,\bbN^+]$；算符$\left \{\v \right \}_s$表示$s$个$\v$的并矢；系数 $\calC_s$  一般是常数（与粒子的质量、电荷数等相关）或者是与低阶速度矩相关的函数。
+\end{definition}
+  
+\begin{definition} \label{定义-广义速度矩}
+  分布函数第$(j,s)$阶\textbf{广义速度矩}为
+  \begin{equation}
+      \bfM_{j,s} \left(\r,t \right) \ = \ m_a \int \rmv^j \left \{\v \right \}_s f \left(\r,\v,t \right) \rmd \v ~. \label{Mjs}
+  \end{equation}
+  其中，参数$j \in \bbN $；变量$\rmv = |\bfv|$。
+\end{definition}
+\noindent
+\begin{definition} \label{定义-归一化广义速度矩}
+  分布函数第$(j,s)$阶\textbf{归一化广义速度矩}为
+  \begin{eqnarray}
+      \bfMh_{j,s} \left(\r,t \right) &=& \int \rmvh^j \left \{\vh \right \}_s \fh \left(\r,\vh,t \right) \rmd \vh  = \frac{1}{\rho_a \vath^{j+s}}\bfM_{j,s} ~. \label{Mhjs}
+  \end{eqnarray}
+  其中，$\rmvh = |\vh|$。组分$a$的\textbf{质量密度}为
+  \begin{eqnarray}
+      \rho_a \left(\r,t \right) &=& \rho_a ~. \label{rhoa} 
+  \end{eqnarray}
+\end{definition}
+\noindent
+  类似地，定义积分
+  \begin{eqnarray}
+      \bfRh_{j,s}^a, \left(\r,t \right) &=& \int \rmvh^j \left \{\vh \right \}_s \colha \left(\r,\vh,t \right) \rmd \vh, \label{Rhjs} \\
+      {\bfR}_{j,s}^a \left(\r,t \right) &=& m_a \int \rmv^j \left \{\v \right \}_s \cola \left(\r,\v,t \right) \rmd \v  = \rho_a \vath^{j+s} \bfRh_{j,s} ~. \label{Rjs}
+  \end{eqnarray}
+  
+\subsection{统计热力学中动理学状态参量} 
+\label{统计热力学中动理学状态参量}
+
+  当取$\calC_{0}=1$、$\calC_{1}=1/n_a$及$\calC_{2}=m_a$时，定义\ref{定义-速度矩}分别给出分布函数的前三阶速度矩（\textbf{粒子数密度}、\textbf{平均速度}与\textbf{总压强张量}），即
+  \begin{eqnarray}
+      n_a \left(\r,t \right) &=& \int  f \left(\r,\v,t \right) \rmd \v=\bfM_{0} = \bfM_{0,0}, \label{na} 
+      \\ 
+      \bfu_a \left(\r,t \right) &=& \frac{1}{n_a} \int \v f \left(\r,\v,t \right) \rmd \v = \bfM_{1} =  \frac{1}{n_a} \bfM_{0,1}, \label{ua} 
+      \\ 
+      \olra{P}_a \left(\r,t \right) &=& m_a \int \v \v f \left(\r,\v,t \right) \rmd \v  \ = \bfM_{2} = \  \bfM_{0,2} ~. \label{PaI}
+  \end{eqnarray}
+  组分$a$的\textbf{动量密度}为
+  \begin{eqnarray}
+      \bfI_a \left(\r,t \right) &=& \rho_a \bfu_a ~. \label{Ia} 
+  \end{eqnarray}
+  组分$a$粒子所携带的空间\textbf{电荷密度}与\textbf{电流密度}分别为
+  \begin{eqnarray}
+      {\rho_q}_a \left(\r,t \right) &=& Z_a n_a = Z_a  \bfM_{0,0}, \label{rhoqa} \\ 
+      \bfJ_a \left(\r,t \right) &=& Z_a n_a \bfu_a = Z_a \bfM_{0,1} ~. \label{Ja}
+  \end{eqnarray}
+  组分$a$粒子所携带的\textbf{总能量密度}为
+  \begin{eqnarray}
+      K_a \left(\r,t \right) &=& \frac{m_a}{2} \int \rmv^2 f \left(\r,\v,t \right) \rmd \v = \frac{1}{2} \bfM_{2,0}~. \label{Ka}
+  \end{eqnarray}
+  
+  % \noindent
+  % \newtheorem{definition}[内能]
+  \begin{definition} \label{定义-内能}
+    组分$a$的\textbf{动理学内能密度}$\epsilon_a $ \footnote{源于分布函数在相空间中精细结构，使得动理学内能密度与热力学平衡时内能密度有内涵差异} 是其总能量密度$K_a$减去其动理学动能密度，即
+    \begin{eqnarray}
+      \epsilon_a \left(\r,t \right)  &=&  K_a  -  E_{k_a}  ~.  \label{epsilona}
+    \end{eqnarray}
+    其中，组分$a$的\textbf{动理学动能密度}与粒子数密度及平均速度具有如下关系
+    \begin{eqnarray}
+      E_{k_a} \left(\r,t \right)  &=&  \frac{1}{2} \rho_a u_a^2  ~.  \label{Eka}
+    \end{eqnarray}
+  \end{definition}
+
+  \begin{assumption} \label{假设-能量均分原理}
+      组分$a$有局域\textbf{动理学温度}，且与内能密度满足\textbf{能量均分原理}；即两者具有如下关系
+      \begin{eqnarray}
+        \epsilon_a \left(\r,t \right) &=& \frac{3}{2} n_a T_a ~. \label{epsilonaTa}
+      \end{eqnarray}
+  \end{assumption}
+  \noindent
+  联立方程\EQ{epsilona}、\EQ{Eka}与\EQ{epsilonaTa}并化简可知，动理学温度、平均速度与总能量密度具有如下关系
+  \begin{eqnarray}
+      T_a \left(\r,t \right)  &=& \frac{2}{3}  \frac{K_a}{n_a}  -  \frac{2}{3} \times \left ( \frac{1}{2} m_a u_a^2 \right)  ~.  \label{TaM}
+  \end{eqnarray}
+  上式等号右边第一项与热力学温度形式上相同；第二项为传统等离子体动理学温度。基于内能定义\ref{定义-内能}与能量均分假设\ref{假设-能量均分原理}，可得动理学温度用分布函数的定义。
+  
+  \begin{definition} \label{定义-动理学温度}
+      \textbf{动理学温度}用分布函数可以表述为
+      \begin{eqnarray}
+        T_a \left(\r,t \right) &=& \frac{2}{3} \frac{m_a}{n_a} \int \frac{\left | \bfw_a \right|^2}{2} f \left(\r,\v,t \right) \rmd \v ~. \label{TaKa}
+      \end{eqnarray}
+      其中，$\bfw_a = \v - \bfu_a$ 是热运动中的随机速度\footnote{本文中随机速度并非如同平衡热力学中是数学上的随机量；其在相空间中可能仍含有精细结构。}。
+  \end{definition}
+  \noindent
+  
+  \begin{definition} \label{定义-热速度}
+      等离子体组分$a$有\textbf{动理学热速度}$\vath$；且与动理学温度具有如下关系
+      \begin{eqnarray}
+        \vath \left(\r,t \right) &=& \sqrt{\frac{2 T_a}{m_a}} ~. \label{vath}
+      \end{eqnarray}
+  \end{definition}
+  \noindent
+  把方程\EQ{TaM}代入上述方程化简得
+      \begin{eqnarray}
+        \vath \left(\r,t \right) &=& \sqrt{\frac{2}{3} \left (\frac{2K_a}{\rho_a} - u_a^2 \right)} ~. \label{vathKu}
+      \end{eqnarray}
+  
+  基于假设\ref{假设-能量均分原理}与动理学状态参量的定义，随机运动引起的\textbf{内禀动理学压强}、\textbf{内禀动理学压强张量}与\textbf{动理学粘滞张量}可分别表述为
+  \begin{eqnarray}
+      p_a \left(\r,t \right) &=& n_a T_a, \label{pa}\\
+      \olra{p}_a \left(\r,t \right) &=& m_a \int \bfw_a \bfw_a f \left(\r,\v,t \right) \rmd \v \ = \ \olra{P}_a - \rho_a \bfu_a \bfu_a  , \label{paI} \\
+      {\olra{\Pi}}_a \left(\r,t \right) &=& \olra{p}_a - p_a \olraI
+      ~. \label{PiaI} 
+  \end{eqnarray}
+  其中，内禀动理学压强张量与动理学粘滞张量具有对称性,即有
+  \begin{eqnarray}
+      p_{a_{ij}} \left(\r,t \right) &=& m_a \int w_{a_i} w_{a_j} f \left(\r,\v,t \right) \rmd \v = p_{a_{ji}}, \label{paij} \\
+      \Pi_{a_{ij}} \left(\r,t \right) &=& p_{a_{ij}} - p_a \delta_i^j = \Pi_{a_{ji}}
+      ~. \label{Piaij}
+  \end{eqnarray}
+  随机运动引起的\textbf{内禀动理学热流矢量}与\textbf{总能流}分别为
+  \begin{eqnarray}
+      \bfq_a \left(\r,t \right) &=& \frac{m_a}{2} \int w_a^2 \bfw_a  f \left(\r,\v,t \right) \rmd \v, \label{bfqa}\\
+      \bfQ_a \left(\r,t \right) &=&  \frac{m_a}{2} \int \rmv^2 \v f \left(\r,\v,t \right) \rmd \v = K_a  \bfu_a +  \bfu_a \cdot  \olra{p}_a  +  \bfq_a = \frac{1}{2}  \bfM_{2,1}
+      ~. \label{bfQa}
+  \end{eqnarray}
+  其中，$w_a=|\bfw_a|$。方程\EQ{bfQa}右边三项分别为组分$a$的宏观流动所带走的总动能、宏观流动时动理学压强张量做功功率与内禀动理学热流矢量。
+  由于Coulomb碰撞效应，组分$b$对组分$a$的\textbf{摩擦阻力}与\textbf{碰撞能量交换}分别为
+  \begin{eqnarray}
+      \bfR_{ab} \left(\r,t \right) &=& m_a \int \v  \frakC_{ab} \left(\r,\v,t \right) \rmd \v = \bfR^{ab}_{0,1}, \label{Rab} \\
+      Q_{ab} \left(\r,t \right) &=& \frac{m_a}{2} \int w_a^2  \frakC_{ab} \left(\r,\v,t \right) \rmd \v 
+      ~. \label{Qab}
+  \end{eqnarray}
+  组分$a$受到所有背景组分的\textbf{摩擦阻力}与\textbf{总碰撞能量交换}可表示为
+  \begin{eqnarray}
+      \bfR_{a} \left(\r,t \right) &=& \sum_b \bfR_{ab}, \label{Ra} \\
+      Q_{a} \left(\r,t \right) &=& \sum_b Q_{ab}
+      ~. \label{Qa}
+  \end{eqnarray}
+  
+  从本节可知，动理学温度与动理学热速度并非等离子体系统的基本状态参数。当系统趋近于平衡热力学时，动理学温度与动理学热速度趋近于热力学中的对应的含义与形式。更一般情形时，动理学温度与动理学热速度代表一种基于基本假设（如能量均分原理\ref{假设-能量均分原理}）的映射关系；并且其具体物理内涵与形式会随着相关定义的不同而有些微改变。为表述方便性，无特别声明时，本节之后将略却动理学状态参量中“动理学”字样。即诸如温度等状态参量皆代表动理学量。
+  
+  \subsection{基于谱展开系数的动理学矩}
+  \label{基于谱展开系数的动理学矩}
+  
+   速度空间采用球极坐标系并用球谐函数对分布函数进行展开处理时，把方程\EQ{fsph}代入广义速度矩（定义\ref{定义-广义速度矩}）以及第\SEC{统计热力学中动理学状态参量}节中动理学状态参量定义的表达式，经过化简可得基于谱展开系数$(f_l^m)$给出各阶动理学矩的表述。
+   \begin{definition} \label{定义-动理学矩}
+       第$(j,l,m)$阶\textbf{动理学矩}是分布函数用球谐函数展开的第$(l,m)$阶振幅的积分函数，有
+      \begin{equation}
+        \calM_{j,l}^m \left(\r,t \right) \ = \ \calM_j \left(f_l^m \right) \ = \ 4 \pi m_a \int \rmv^{j+2} \flm \left(\r,\rmv,t \right) \rmd \rmv ~. \label{Mjlm}
+      \end{equation}
+   \end{definition}
+   \noindent
+   其中，整数满$j$、$l$与$m$满足
+      \begin{equation}
+            l \in [0, \bbN^+], \quad -l \le m \le l, \quad -(l+2) \le j.
+      \end{equation}
+   
+   \begin{definition} \label{定义-动理学耗散力}
+       第$(j,l,m)$阶\textbf{动理学耗散力}是Fokker-Planck碰撞项用球谐函数展开的第$(l,m)$阶振幅的积分函数，有
+      \begin{equation}
+        \calR_{j,l}^m \left(\r,t \right) \ = \ \calR_j \left(f_l^m \right) \ = \ 4 \pi m_a \int \rmv^{j+2} \collma \left(\r,\rmv,t \right) \rmd \rmv ~. \label{Rjlm}
+      \end{equation}
+   \end{definition}
+   
+  把方程\EQ{fsph}代入分布函数速度矩的定义\EQ{Mjs}，经过速度空间角度积分运算可以得到用分布函数各阶展开系数$f_l^m \left(\r,\rmv,t \right)$来表示的各阶速度矩形式。前几阶速度矩表述如下：
+  \begin{eqnarray}
+      \left < g \right> &=& \frac{1}{n_a} \calM_j \left(g \left \{\bff_0 \right\} \right), \label{Mg0} \\
+      \left < g \frac{\v}{\rmv} \right> &=& \frac{1}{n_a} \frac{1}{3} \calM_0 \left(g \left \{\bff_1 \right\} \right), \label{Mg1} \\
+      \left < g \frac{\v \v}{\rmv^2} \right> &=&  \frac{1}{3} \left < g \right> \olra{I} + \frac{1}{n_a} \frac{2}{3 \times 5} \calM_0 \left(g \left \{\bff_2 \right\} \right), \label{Mg2} \\
+      \left < g \frac{\v \v \v}{\rmv^3} \right> &=&  \frac{1}{n_a} \frac{1}{5} \calM_0 \left(g \left [\left(\bff_1 \cdot \bff_1 \right) \bff_1 \olra{I} \right]_l \right) + \frac{1}{n_a} \frac{2 \times 3}{3 \times 5 \times 7} \calM_0 \left(g \left \{\bff_3 \right\} \right) ~. \label{Mg3}
+  \end{eqnarray}
+  其中，$\left [\cdot \right]_l$ 表示完全对称的$l$阶张量；$g=g\left(\rmv \right)$是速率$\rmv$的任意函数。上述定义的速度矩积分中的分布函数张量为实数形式，前三阶为
+  \begin{eqnarray}
+      \left \{\bff_0 \right \} &=& f_{000} = f_0^0, \label{fhj0I}\\
+      \left \{\bff_1 \right \} &=& \left [f_{110} \quad f_{111} \quad f_{100} \right]^T =  \left [2 {f_1^1}_{\R} \quad -2 {f_1^1}_{\I} \quad f_1^0 \right]^T,  \label{fhj1I}\\ 
+      \left \{\bff_2 \right \} &=& \frac{1}{2} 
+      \begin{bmatrix}
+      -1 & 0 & 0 \\
+      0 & -1 & 0 \\
+      0 & 0 & 2 \\
+      \end{bmatrix}
+      f_2^0 + 3 \left \{\bff_2^{12} \right \} ~. \label{fhj2I}
+  \end{eqnarray}
+  其中，矩阵$\left \{\bff_2^{12} \right \}$为
+  \begin{equation}
+      \left \{\bff_2^{12} \right \} \ = \  
+      \begin{bmatrix}
+      2 {f_2^2}_{\R} & -2 {f_2^2}_{\I} & {f_2^1}_{\R} \\
+      -2 {f_2^2}_{\I} & -2 {f_2^2}_{\R} & -{f_2^1}_{\I} \\
+      {f_2^1}_{\R} & -{f_2^1}_{\I} & 0 \\
+      \end{bmatrix} \label{f212}
+  \end{equation}
+  根据以上速度矩\EQ{na}-\EQ{Mg3}与分布函数实函数张量\EQ{fhj0I}-\EQ{f212}的定义，可以方便得到前几阶矩用分布函数展开系数$f_l^m$的表述形式。应用速度空间归一化关系\EQ{vh}与\EQ{fh}，从动理学矩的定义\ref{定义-动理学矩}可得到其归一化形式。
+  
+  \begin{definition} \label{定义-归一化动理学矩}
+      第$(j,l,m)$阶\textbf{归一化动理学矩}为
+      \begin{equation}
+        \calMh_{j,l}^m \left(\r,t \right) \ = \ \calMh_j \left(\fhlm \right) \ = \ 4 \pi \int \rmvh^{j+2} \fhlm \left(\r,\rmvh,t \right) \rmd \rmvh ~. \label{Mhjlm}
+      \end{equation}
+  \end{definition}
+  \noindent
+  \begin{definition} \label{定义-归一化动理学耗散力}
+      第$(j,l,m)$阶\textbf{归一化动理学耗散力}为
+      \begin{equation}
+          \calRh_{j,l}^m \left(\r,t \right) \ = \ \calRh_j \left(\fhlm \right) \ = \ 4 \pi \int \rmvh^{j+2} \colhlma \left(\r,\rmvh,t \right) \rmd \rmvh ~. \label{Rhjlm}
+  \end{equation}
+  \end{definition}
+  \noindent
+  归一化动理学矩函数$\calMh_{j,l}^m$与$\calM_{j,l}^m$有如下关系
+  \begin{equation}
+      \calM_{j,l}^m \left(\r,t \right) \ = \ \rho_a \vath^{j} \calMh_{j,l}^m  ~. \label{MMhjlm}
+  \end{equation}
+  类似地，归一化动理学耗散力函数$\calRh_{j,l}^m$与$\calR_{j,l}^m$满足
+  \begin{equation}
+      \calR_{j,l}^m \left(\r,t \right) \ = \ \rho_a \vath^{j} \calRh_{j,l}^m  ~. \label{RRhjlm}
+  \end{equation}
+
+  记$h_j = h_j \left(\rmvh \right) = C_j \rmvh^j$是归一化速率$\rmvh$的$j$次函数,则前几阶归一化速度矩用归一化振幅$\fhlm$表述如下：
+  \begin{eqnarray}
+      \left < h_j \right> &=& C_j \calMh_j \left( \fh_0^0 \right), \label{Mhg0} \\
+      \left < h_j \frac{\vh}{\rmvh} \right> &=&  \frac{1}{3} C_j \calMh_j \left( \left \{\bffh_1 \right\} \right), \label{Mhg1} \\
+      \left < h_j \frac{\vh \vh}{\rmvh^2} \right> &=&  \frac{1}{3} C_j \calMh_j \left( \fh_0^0 \right) \olra{I} + \frac{2}{3 \times 5} C_j \calMh_j \left(\left \{\bffh_2 \right\} \right), \label{Mhg2} \\
+      \left < h_j \frac{\vh \vh \vh}{\rmvh^3} \right> &=&  \frac{1}{5} C_j \calMh_j \left(\left [\left(\bffh_1 \cdot \bffh_1 \right) \bffh_1 \olra{I} \right]_l \right) + \frac{2 \times 3}{3 \times 5 \times 7} C_j \calMh_j \left(\left \{\bffh_3 \right\} \right) ~. \label{Mhg3}
+  \end{eqnarray}
+  其中，$C_j$通常是粒子质量$m_a$、粒子电荷数$Z_a$以及低阶矩$n_a$、$\vath$、$\bfu_a$等的函数。特别地当$j=l$时，前三阶归一化速度矩可表述如下：
+  \begin{eqnarray}
+      \left < h_0 \right> &=& C_0 \calMh_0 \left( \fh_0^0 \right) = C_0 \bfMh_{0,0} \label{Mhgl0} \\
+      \left < h_1 \frac{\vh}{\rmvh} \right> &=&  \frac{1}{3} C_1 \calMh_1 \left( \left \{\bffh_1 \right\} \right) = C_1 \bfMh_{0,1}, \label{Mgl1} \\
+      \left < h_2 \frac{\vh \vh}{\rmvh^2} \right> &=&  C_2 \left[\frac{1}{3} \calMh_2 \left( \fh_0^0 \right) \olra{I} + \frac{2}{3 \times 5} \calMh_3 \left(\left \{\bffh_2 \right\} \right) \right] = C_2 \bfMh_{0,2} ~. \label{Mgl2}
+  \end{eqnarray}
+  前几阶归一化实分布函数张量$\left \{\bffh_l \right\}$为
+  \begin{eqnarray}
+      \left \{\bffh_1 \right \} &=& \left [{\fh}_{110} \quad {\fh}_{111} \quad {\fh}_{100} \right]^T = 
+      \begin{bmatrix}
+          2 {{\fh}{_1^1}}_{\R} & -2 {{\fh}{_1^1}}_{\I} & {\fh}{_1^0}
+      \end{bmatrix}^T , \label{fh1I} 
+      \\ 
+      \left \{\bffh_2 \right \} &=& \frac{1}{2} 
+      \begin{bmatrix}
+      -1 & 0 & 0 \\
+      0 & -1 & 0 \\
+      0 & 0 & 2 \\
+      \end{bmatrix}
+      {\fh}{_2^0} + 3 \left \{\bffh_2^{12} \right \} ~. \label{fh2I}
+  \end{eqnarray}
+  以及
+  \begin{equation}
+      \left \{\bffh_2^{12} \right \} \quad = \quad 
+      \begin{bmatrix}
+      2 {{\fh}{_2^2}}_{\R} & -2 {{\fh}{_2^2}}_{\I} & {{\fh}{_2^1}}_{\R} \\
+      -2 {{\fh}{_2^2}}_{\I} & -2 {{\fh}{_2^2}}_{\R} & -{{\fh}{_2^1}}_{\I} \\
+      {{\fh}{_2^1}}_{\R} & -{{\fh}{_2^1}}_{\I} & 0 \\
+      \end{bmatrix} \label{fh212}
+  \end{equation}
+  
+  基于归一化动理学矩的定义\EQ{Mhjlm}，应用球谐函数展开方法，可以方便给出统计物理系统的任意有限阶归一化动理学矩以及归一化动理学矩方程（振幅函数$\fhlm$演化方程在速度空间的积分形式）。若已知$n_a$与$\vath$，则前几阶矩用归一化动理学矩可表述为
+  \begin{eqnarray}
+      n_a \left(\r,t \right) &=& n_a \nh_a = n_a \calMh_{0,0}^0 ,  \label{naMh} 
+      \\
+      \bfu_a \left(\r,t \right) &=& \vath \uh_a = \frac{1}{3}\vath \calMh_1 \left(\left \{\bffh_1 \right \} \right) ,  \label{uaMh} 
+      \\
+      K_a \left(\r,t \right) &=& \frac{1}{2} \bfM_{2,0} = n_a T_a \Kh_a = \frac{1}{2} \rho_a \vath^2 \calMh_{2,0}^0, \label{KaMh}
+      \\
+      \olra{P}_a \left(\r,t \right) &=& \ \bfM_{0,2} =  \  \rho_a \vath^2 \bfMh_{0,2} ~. \label{PaIh}
+  \end{eqnarray}
+  把方程\EQ{uaMh}与\EQ{KaMh}代入方程\EQ{TaM}，化简得
+  \begin{eqnarray}
+      T_a &=& \frac{2}{3} \left(\frac{K_a}{n_a} - T_a \uha^2 \right) = \frac{2}{3} T_a  \left(\Kh_a - \uha^2 \right)  ~. \label{TaMh}
+  \end{eqnarray}
+  此即
+  \begin{eqnarray}
+      \Kh_a - \uh_a^2  &=&  \frac{3}{2} ~. \label{Khauha}
+  \end{eqnarray}
+  上述方程为归一化分布函数的前两阶振幅$ f_0^0$与$\left \{\bffh_1 \right \}$基于定义\ref{定义-内能}的宏观约束方程。
+  
+
+\section{等效原理}
+
+  由等价原理\ref{定理-等价原理}可知，描述同一个物理现象可以有不同的等效理论描述。应用等价原理，对于有限体积、有限密度、有限温度、有限组分的等离子体，描述其集体效应时有如下\textbf{等效原理}：
+\begin{theorem} \label{定理-等效原理}
+    特定状态的等离子体系统等价于有限个简单等离子体系统的状态集合。
+\end{theorem}
+
+当等离子体系统的状态用分布函数描述时，等效原理可表述为如下\textbf{态叠加原理}。
+\begin{theorem} \label{定理-态叠加原理}
+    等离子体系统的状态函数可展开为有限个简单分布函数的线性叠加，即
+      \begin{eqnarray}
+        f \left(\r,\v,t \right) = \sum_{s=1}^{N}  \left [f_s \left(\r,\v,t \right)  \right] ~.  \label{ffs}
+      \end{eqnarray}
+    当采用Gaussian函数时，子函数为具有不同物质属性的简单函数
+      \begin{eqnarray}
+        f_s \left(\r,\v,t \right) = f_s \left(\r,\v,t;\nas,\uas,\vaths \right) ~.  \label{ffs}
+      \end{eqnarray}
+    其中，$\nas$，$\uas$与$\vaths$是$f_s$的前三阶动理学矩，即数密度、平均速度与热速度。
+\end{theorem}
+\noindent
+当不同$s$具有相同的质量与电荷等物理属性时，$f$代表特定组分$a$的分布函数；反之，$f$代表等离子体系统的分布函数。
+
+\section{动理学矩方程}
+\label{动理学矩方程}
+
+  质量守恒（粒子数密度守恒）、动量守恒与能量守恒是统计物理系统遵循的三个基本定律。在等离子体物理中，三个基本守恒定律通常可用磁流体力学方程组描述。
+  磁流体力学是把电动力学与流体力学结合描述导电流体在电磁场中的运动规律。磁流体力学基本方程包括描述电磁场演化的电动力学方程组与描述流体运动的流体力学方程组。其中，流体力学方程组可以从统计系统的动理学方程的速度矩方程得到。
+
+  \subsection{守恒定律}
+  \label{守恒定律}
+
+  定义积分
+  \begin{eqnarray}
+      \left <\Psi \left(\bfv \right ) \right > & = & \frac{1}{n_a} \int \Psi \left(\bfv \right ) f \left(\bfv \right ) \rmd \v , \label{Mpsi} \\
+      \scrR_a \left(\Psi \right ) & = & \int  \Psi \left(\bfv \right ) \cola \left(\bfv \right ) \rmd \v ~. \label{Rpsi}
+  \end{eqnarray}
+  其中，函数$\Psi = \Psi \left(\bfv \right )$ 表示$\bfv$的任意函数，
+  动理学方程\EQ{VFPd}两边同乘以$\Psi \left(\bfv \right )$ ，并对$\rmd \v$积分可得到一般形式的\textbf{速度矩方程}
+  \begin{equation}
+  \begin{aligned}
+      \ddt \left [n_a \left <\Psi \left(\bfv \right ) \right > \right ] \ = & \ \scrR_a(\Psi) - \nabla \cdot \left [n_a \left <\bfv \Psi \right > \right ] 
+      \\ 
+      + & \frac{Z_a}{m_a} n_a  \left [\bfE \cdot \left <\ddbfv \Psi \right > + \left(\v \times \bfB \right) \cdot \left <\ddbfv \Psi \right > \right ]  ~. \label{MEq}
+  \end{aligned}
+  \end{equation}
+  
+  \subsubsection{连续性方程}
+\label{连续性方程}
+  
+  连续性方程描述的是统计系统粒子数密度（或质量密度）具有守恒性质。令$\Psi = 1$，方程\EQ{MEq}即为\textbf{粒子数密度守恒方程}
+  \begin{equation}
+      \ddt n_a + \nabla \cdot \left (n_a \bfu_a \right ) \ = \ 0 ~. \label{MEqna}
+  \end{equation}
+  或者令$\Psi = m_a$，方程\EQ{MEq}即为\textbf{质量守恒方程}
+  \begin{equation}
+      \ddt \rho_a + \nabla \cdot \left (\rho_a \bfu_a \right )  \ = \ 0~. \label{MEqrhoa}
+  \end{equation}
+  连续性方程应用了Coulomb弹性散射的性质，即Coulomb碰撞项的零阶速度矩积分为零
+  \begin{equation}
+      \scrR_a \left(1 \right) \ = \ \int \cola \rmd \v = 0 ~. \label{Rpsi0}
+  \end{equation}
+  % 从方程\EQ{MEqna}-\EQ{MEqrhoa}可知，
+  
+  \subsubsection{动量守恒方程}
+\label{动量守恒方程}
+
+  令$\Psi = m_a \bfv $，方程\EQ{MEq}即为动量守恒方程
+  \begin{equation}
+  \begin{aligned}
+      \ddt \left [\rho_a \left <\bfv \bfv \right > \right ] \ =& \ m_a \scrR_a(\bfv) - \nabla \cdot \left [\rho_a \left <\bfv \bfv \right > \right ] 
+      \\ 
+      + & Z_a n_a  \left [\bfE \cdot \left <\ddbfv \bfv \right > + \left(\v \times \bfB \right) \cdot \left <\ddbfv \bfv \right > \right ] ~. \label{MEqIa0} 
+  \end{aligned}
+  \end{equation}
+  应用分部积分以及前几阶速度矩定义（见第\SEC{统计热力学中动理学状态参量}节），经过合并同类项可得\textbf{动量守恒方程}
+  \begin{equation}
+      \ddt I_a \ = \ - \nabla \cdot \left (\bfM_{0,2} \right ) + Z_a n_a  \left (\bfE + \bfu_a \times \bfB \right ) + \bfR^a_{0,1} ~. \label{MEqIa} 
+  \end{equation}
+  应用质量守恒方程\EQ{MEqrhoa}以及方程\EQ{paI}-\EQ{PaI},上述方程可以改写为磁流体力学中\textbf{流体元运动方程}形式
+  \begin{equation}
+      \rho_a \DDt \bfu_a \ = \ - \nabla \cdot \olra{\Pi}_a - \nabla p_a + Z_a n_a \bfE + Z_a n_a  \left (\bfu_a \times \bfB \right ) + m_a \bfR^a_{0,1} ~. \label{MEqua} 
+  \end{equation}
+  其中，右边各项表示粘滞力、热压力、电场力、磁场力以及流体元受到的摩擦阻力（组分$a$粒子与不同组分粒子弹性碰撞后失去的动量）；组分$a$的随体导数算符$\rmd / \rmd t$为
+  \begin{equation}
+      \DDt = \ddt + \bfu_a \cdot \nabla ~. \label{DDt} 
+  \end{equation}
+  
+  
+  \subsubsection{总能量守恒方程}
+\label{总能量守恒方程}
+
+  令$\Psi = m_a |\bfv|^2 / 2 $，代入方程\EQ{MEq}得
+  \begin{equation}
+  \begin{aligned}
+      \ddt \left [\frac{m_a}{2} n_a \left < |\bfv|^2 \right > \right ] \ =& \ \frac{m_a}{2} \scrR_a(|\bfv|^2) - \nabla \cdot \left (\frac{m_a}{2} n_a \left <|\bfv|^2 \bfv \right > \right ) 
+      \\ 
+      + & Z_a n_a  \left [\bfE \cdot \left <\ddbfv |\bfv|^2 \right > +  \left(\v \times \bfB \right) \cdot \left <\ddbfv |\bfv|^2 \right > \right ] ~. \label{MEqKa0} 
+  \end{aligned}
+  \end{equation}
+  应用分部积分以及速度宏定义（见第\SEC{统计热力学中动理学状态参量}节），经过合并同类项可得\textbf{总能量守恒方程}
+  \begin{equation}
+      \ddt K_a \ = \ - \nabla \cdot \bfQ + Z_a n_a \u_a \cdot  \bfE + m_a  \u_a \cdot \bfR^a_{0,1} + Q_{a} ~. \label{MEqKa} 
+  \end{equation}
+  上述方程中等号右边项分别描述组分$a$的流体元表面流入的净能流、电场对流体元做功功率（欧姆加热功率）、碰撞摩擦阻力做功功率以及与背景组分Coulomb碰撞交换的能量。
+  应用质量守恒方程\EQ{MEqrhoa}、动量守恒方程\EQ{MEqIa}以及方程\EQ{paI}-\EQ{bfQa},总能量守恒方程可以改写为磁流体力学中的\textbf{热平衡方程}
+  \begin{equation}
+      \frac{3}{2} n_a \DDt T_a \ = \ - \left(\olra{p}_a \cdot \nabla \right) \cdot \u_a  - \nabla \cdot \bfq_a + Q_a ~. \label{MEqTa} 
+  \end{equation}
+  其中，右边各项表示粘滞力（内摩擦力）做功功率、热传导以及与背景组分碰撞引起的热能交换。上述方程也可以在一般速度矩方程\EQ{MEq}中令$\Psi = m_a |\bfw_a|^2 / 2 $进行直接计算得到。
+  
+  方程\EQ{MEqna}、\EQ{MEqua}与\EQ{MEqTa}共同组成等离子体的\textbf{双流体模型}。基于动理学得到的双流体方程组是严格且精确的；然而此时方程组不封闭。低阶速度矩方程中总包含有高一阶速度矩的分量（见方程\EQ{VFPhlmdAEBC}-\EQ{Bl}）。因此，理论上严格从动理学方程得到的速度矩方程组具有无穷多阶；单纯提高速度矩方程的最大阶数并不能使得速度矩方程组封闭。
+
+  使速度矩方程组封闭通常有两种处理方案：第一种方案是最高阶速度矩方程中的更高一阶速度矩用低阶速度矩近似。例如当等离子体系统处于近平衡分布时，双流体模型中粘滞张量$\olra{\Pi}$与内禀热流矢量$\bfq_a$
+  都是微小的量，则可以基于Chapman-Enskog展开方法得到用低阶速度矩（$n_a,\u_a,T_a$）等及其导数近似形式；不同的截断方式分别得到Euler模型、Navier-Stokes（NS）模型与Burnett模型与超Burnett模型等封闭速度矩方程组。其中，Euler模型、Navier-Stokes模型与Burnett模型分别是动理学方程分别最高保留Chapman-Enskog展开的零阶（局域热平衡）、一阶与二阶效应时对应的宏观流体模型。
+  
+  第二种方案是保留足够高阶方程，使得最高阶方程中的更高一阶速度矩是小量；略去额外的最高阶速度矩从而近似得到封闭的速度矩方程组。从第\ref{基于VFP谱方程的动理学矩方程}节可知，等离子体由于Coulomb碰撞效应总是自发趋向于热平衡方向，并且$l\ge1$的振幅$\fhlm$总是以正比于$l(l+1)$的速率衰减。换而言之，阶数$l$越大的振幅衰减越快；直到只有零阶振幅。因此对于偏离平衡态不是极远（无显著强流束）的等离子体系统，保留足够多阶后的速度矩方程组中的更高一阶速度矩可当做小量。
+  
+  例如，漂移麦克斯韦分布中当$\uh_a = (0.1,0.3,0.707,1.0,2.0,3.0)$、谱截断的最高阶数分别为$l_{Max} = (10,14,20,23,34,45)$时，归一化分布函数的最高阶振幅$\fhlm$的最大值接近双浮点机器误差（$10eps$）。此时最高阶速度矩方程中的更高一阶速度矩可以忽略，从而封闭速度矩方程组（更严谨的方案是基于方案二再应用方案一，以进一步降低模型截断误差；本文不予展开讨论）。对于聚变等离子体与太阳等离子体系统，特别是磁约束等离子体中大部分所关心的情形皆满足$\uh_a\le 3.0$。后续章节将基于第二种方案对VFP方程\EQ{VFPhdAEBC}进行理论分析、建立模型、构造算法并进行相关数值分析。
+  
+  \subsection{基于VFP谱方程的动理学矩方程}
+  \label{基于VFP谱方程的动理学矩方程}
+  
+  第$(l,m)$阶VFP谱方程\EQ{VFPhlmdAEBC}两边同乘以$4 \pi m_a \rmv^{j+2} \rmd \rmv$，并在半无穷区间$\rmv = \left [0, \infty \right)$积分，应用关系\EQ{vh}-\EQ{fh}并经化简可得第$(j,l,m)$阶弱形式的Fokker-Planck动理学方程。根据动理学矩\EQ{Mjlm}、\EQ{Mhjlm}及动理学耗散力\EQ{Rhjlm}的定义，弱形式的动理学方程即为Fokker-Planck碰撞项方程对应的动理学矩方程
+  \begin{eqnarray}
+      \ddt \calM_{j,l}^m & = & \rho_a \vath^j \delta_t \calMh_{j,l}^m   ~.  \label{dtMjlmVFP}
+  \end{eqnarray}
+  其中，
+  \begin{eqnarray}
+      \delta_t \calMh_{j,l}^m & = & \calMh_j \left(\Ahlm \right) + \calMh_j \left(\Ehlm \right) +  \calMh_j \left(\Bhlm \right) +  \calRh_j \left(\colhlma \right) ~.  \label{RdtMjlmVFP}
+  \end{eqnarray}
+  上述方程具体形式见第\ref{3D-3V维归一化动理学矩方程}小节。把方程\EQ{MMhjlm}代入方程\EQ{dtMjlmVFP}，化简可得第$(j,l,m)$阶\textbf{归一化动理学矩演化方程}为
+  \begin{eqnarray}
+      \ddt \calMh_{j,l}^m & = & - \calMh_{j,l}^m \left(\Rdtrhoa + j \Rdtvath \right)  + \delta_t \calMh_{j,l}^m ~.  \label{dtMhjlmVFP}
+  \end{eqnarray}
+  此即在球极坐标系中用展开系数$\fhlm$表述的一般形式的归一化动理学矩方程。其中，函数$\Ahlm$、$\Ehlm$与$\Bhlm$分别由方程\EQ{Ahlm}-\EQ{Bl}给出；函数$\colhlma$的具体形式见第\SEC{归一化FPS碰撞算子的球谐函数展开}节。把方程\EQ{Ahlm}-\EQ{Bl}代入上述方程\EQ{dtMhjlmVFP}，应用分部积分以及合并同类项，可得归一化动理学矩方程在速度空间有不同对称性时的具体形式。
+  
+  \subsubsection{0D-1V维归一化动理学矩方程}
+  \label{0D-1V维归一化动理学矩方程}
+  
+  当系统在速度空间具有\textbf{球对称性}时，即$m \equiv 0$且有$l \equiv 0$；此时有$\uha \equiv 0$。记第$(j,0,0)$阶归一化动理学矩$\calMhj$为第$j$阶\textbf{归一化标量矩}；此时$\calMhj$的演化方程为
+  \begin{eqnarray}
+      \ddt \calMhj  &=& -  \calMhj \left(\Rdtrhoa + j \Rdtvath \right) + \calRh_{j,0}^0 ~.  \label{dtMhjna}
+  \end{eqnarray}
+  当$j=0$时，代入质量守恒定律
+  \begin{eqnarray}
+      \Rdtrhoa &=& \Rdtna \equiv 0, \label{dtna3D1V}
+  \end{eqnarray}
+  上述方程化简得
+  \begin{eqnarray}
+      \ddt \calMh_{0,0}^0  & \equiv & 0  ~.  \label{dtMh0}
+  \end{eqnarray}
+  此即质量守恒定律的归一化形式。
+  
+  同理，当$j=2$时，方程\EQ{dtMhjna}化简可得
+  \begin{eqnarray}
+      \Rdtvath &=&  \frac{1}{3} \calRh_{2,0}^0 ~.  \label{dtvath3D1V}
+  \end{eqnarray}
+  方程\EQ{dtvath3D1V}即为0D维热平衡方程；其中应用了能量守恒方程的归一化形式，即
+  \begin{eqnarray}
+      \ddt \calMh_{2,0}^0  &=& \calRh_{2,0}^0 \left (1 - \frac{2}{3} \calMh_{2,0}^0 \right) \equiv 0  ~.  \label{dtMh2}
+  \end{eqnarray}
+  此时，Coulomb碰撞过程中总能量随时间的变化率可以表述为
+  \begin{eqnarray}
+      \ddt K_a  &=&  n_a  T_a \calRh_{2,0}^0 ~ .  \label{dtKa} 
+  \end{eqnarray}
+  把方程\EQ{dtna3D1V}与\EQ{dtvath3D1V}代入\EQ{dtMhjna}，化简
+  \begin{eqnarray}
+      \ddt \calMhj  &=& -  \frac{j}{3} \calRh_{2,0}^0 \calMhj + \calRh_{j,0}^0 ~.  \label{dtMhj}
+  \end{eqnarray}
+  
+  方程\EQ{dtMhj}意味着在理论上，速度空间球对称性使得物理空间中宏观梯度（电势梯度$\bfE$、磁势梯度$\bfB$以及所有归一化动理学矩梯度）皆为零，而第$(j\ge 3,0,0)$阶归一化动理学矩随时间的变化率不一定为零。此时3D维速度矩方程\EQ{MEq}约化为\textbf{0D维归一化动理学矩方程}\EQ{dtna3D1V}-\EQ{dtMhj}；对应的VFP方程\EQ{VFPhdAEBC}约化为0D-1V维VFP谱方程\EQ{VFPhodAEBC}。记速度空间具有球对称性的系统处于\textbf{均匀空间准平衡态}。反之，若系统物理空间存在有非零宏观梯度，即有物质流、动量流、能量流或电流等宏观流，则系统分布函数在速度空间不严格具有球对称性。
+  
+  从方程\EQ{dtna3D1V}-\EQ{dtMhj}可知，当等离子体系统处于均匀空间准平衡态时，单一组分的动量恒为零、粒子数密度保持恒定而局域温度可能随时间改变。也就是说处于\textbf{均匀空间准平衡态}时，由于Coulomb碰撞效应等离子体各组分处于动量平衡、能量有交换（温度不相同）且$j\ge3$的归一化标量矩随时间演化的状态。
+  \begin{proposition} \label{定理-VFP的解3D1V-Maxwellian混合分布}
+      具有期望值$\uhas \equiv 0$形式的\textbf{Gaussian混合分布（Gaussian Mixture Model，GMM）}是0D-1V维轴对称VFP谱方程\EQ{VFPhodAEBC}的一组理论解，
+      \begin{eqnarray}
+        \fhlm \left(\r,\rmvh,t \right)  &=& \delta_l^0 \delta_m^0 \sum_{s=1}^{N} \left[ \frac{\nhas}{\vhaths^3} \exp{\left(-\frac{\rmvh^2}{\vhaths^2} \right)} \right] ~.  \label{fhofhos}
+      \end{eqnarray}
+      记为\textbf{Maxwellian混合分布（Maxwellian Mixture Model，MMM）}。其必要条件是
+      \begin{eqnarray}
+        \sum_{s=1}^{N} \nhas &=& 1 ~, \label{nhas0}
+        \\
+        \sum_{s=1}^{N} \nhas \vhaths^2 &=& 1 ~. \label{Thas0}
+      \end{eqnarray}
+      其中，$\nhas=\nas / n_a$与$\vhaths = \vaths / \vath$分别表示组分$a$的基态振幅$\fho$的第$s$个子分布的\textbf{权重系数}与\textbf{标准差}；分别表示振幅函数子分布的归一化密度与归一化热速度。
+  \end{proposition}
+
+  \begin{proof}
+      把方程\EQ{fhofhos}代入动理学矩的定义式\EQ{Mjlm}，等离子体组分$a$的粒子数密度、平均速度与总能量分别为
+      \begin{eqnarray}
+        n_a \left(\r,t \right) &=& n_a \sum_{s=1}^{N} \nhas , \label{nas}
+        \\
+        \ua \left(\r,t \right) &=& 0 , \label{uas}
+        \\
+        K_a \left(\r,t \right) &=& \frac{3}{2} n_a T_a \sum_{s=1}^{N} \nhas \vhaths^2~. \label{Kas}
+      \end{eqnarray}
+      联立方程\EQ{nas}-\EQ{Kas}及\EQ{TaM}并化简可知， 归一化的粒子数密度、动理学温度与总能量满足
+      \begin{eqnarray}
+        \nh_a \left(\r,t \right) &=& \sum_{s=1}^{N} \nhas \quad \equiv \quad 1 ~, \label{nhas}
+        \\
+        \uhaz \left(\r,t \right) &=& 0 , \label{uhazs}
+        \\
+        \Kh_a \left(\r,t \right) & =   &  \frac{3}{2} \Th_a \quad \equiv  \quad  \frac{3}{2} ~. \label{Khas}
+      \end{eqnarray}
+      其中，归一化温度满足
+      \begin{eqnarray}
+        \Th_a \left(\r,t \right) &=& \sum_{s=1}^{N} \nhas \vhaths^2 \quad \equiv \quad 1 ~. \label{Thas}
+      \end{eqnarray}
+      得证。
+  \end{proof}
+
+  从定理\ref{定理-VFP的解3D1V-Maxwellian混合分布}可知，\textbf{Maxwellian混合分布}是VFP方程\EQ{VFPhdAEBC}的无亚观平均运动（$\uhas \equiv 0$）的解。从定理\ref{定理-VFP的解3D1V-Maxwellian混合分布}出发，可进一步找到VFP方程\EQ{VFPhdAEBC}的\textbf{均匀空间平衡态解}，即系统处于\textbf{热力学平衡态}时的分布函数。
+
+  \begin{proposition} \label{定理-热力学平衡态}
+      若Maxwellian混合分布中所有归一化动理学矩都不随时间改变，且其空间梯度皆为零；即归一化动理学矩演化方程为
+      \begin{eqnarray}
+        \ddt \calMhjlm  &\equiv&  0 ~.  \label{dtMho}
+      \end{eqnarray}
+      此时，系统宏观状态处于空间均匀且不随时间改变的状态；此即\textbf{热力学平衡态}。可以证明此时Maxwellian混合分布\EQ{fhofhos}中不同子分布具有相同标准差，即$\vhaths \equiv \vhath = 1$。换而言之，热力学平衡态的分布函数服从\textbf{Maxwellian分布}；其归一化形式为
+      \begin{eqnarray}
+            \fhlm  &=& \delta_l^0 \delta_m^0 e^{- \rmvh^2} ~.  \label{fho}
+      \end{eqnarray}
+  \end{proposition}
+  \noindent
+  记方程\EQ{fho}为\textbf{Maxwellian模型（Maxwellian Model，MM）}。
+
+
+  \subsubsection{1D-2V维归一化动理学矩方程}
+  \label{1D-2V维归一化动理学矩方程}
+  
+  当系统在速度空间具有\textbf{轴对称性}且坐标轴$z$与对称轴重合时，有$m\equiv0$，即$m\ge1$的动理学矩恒为零。令$\uaz = \mu_u u_a$，其中$\mu_u =\pm 1$；则Fokker-Planck碰撞项方程对应的第$(j,l,0)$阶动理学矩方程为
+  \begin{eqnarray}
+      \ddt \calM_{j,l}^0 & = & \rho_a \vath^j \delta_t \calMh_{j,l}^0   ~.  \label{dtMjlVFP}
+  \end{eqnarray}
+  其中，
+  \begin{eqnarray}
+      \delta_t \calMh_{j,l}^0 & = & \calMh_j \left(\Ahl \right) + \calMh_j \left(\Ehl \right) +  \calMh_j \left(\Bhl \right) +  \calRh_j \left(\colhla \right) ~.  \label{RdtMjlVFP}
+  \end{eqnarray}
+  
+  此时\textbf{第$(j,l,0)$阶归一化动理学矩的演化方程}可以表述为
+  \begin{eqnarray}
+  \begin{aligned}
+      \ddt \calMhjlo  =&  - \frac{1}{\rho_a {\rmv}{_{ath}^j} } \ddz  \left[ \rho_a {\rmv}{_{ath}^{j+1}} \left(\frac{l}{2l-1} \calMh_{j+1,l-1}^0 + \frac{l+1}{2l+3} \calMh_{j+1,l+1}^0 \right) \right] 
+      \\ & + 
+      \frac{Z_a}{m_a} \frac{E_z}{\vath} \left[\frac{l (j+l+1)}{2l-1} \calMh_{j-1,l-1}^0 + \left(j-l \right) \frac{l+1}{2l+3} \calMh_{j-1,l+1}^0 \right]  
+      \\ & - \calMhjlo \left(\Rdtrhoa + j \Rdtvath \right) + \calRh_{j,l}^0 ~.  \label{dtMhjl}
+  \end{aligned}
+  \end{eqnarray}
+  当$l=0$时，上述方程为
+  \begin{eqnarray}
+  \begin{aligned}
+      \ddt \calMhj  =&  - \frac{1}{\rho_a {\rmv}{_{ath}^j} } \ddz  \left( \frac{1}{3} \rho_a  {\rmv}{_{ath}^{j+1}} \calMh_{j+1,1}^0 \right) + 
+      \frac{Z_a}{3 m_a} \calMh_{j-1,1}^0 \frac{E_z}{\vath}  \\ & - \calMhj \left(\Rdtrhoa + j \Rdtvath \right) + \calRh_{j,0}^0 ~.  \label{dtMhj002V}
+  \end{aligned}
+  \end{eqnarray}
+  特别地，当$j=0$与$j=2$时分别有
+  \begin{eqnarray}
+      \dtrhoa &=& -\frac{1}{3} \ddz \left(\rho_a \vath \uhaz \right) \label{dtna1D2V}
+  \end{eqnarray}
+  以及
+  \begin{eqnarray}
+  \begin{aligned}
+      \ddt \calMh_{2,0}^0  =&  - \frac{1}{\rho_a {\rmv}{_{ath}^2} } \ddz  \left( \frac{1}{3} \rho_a  {\rmv}{_{ath}^3} \calMh_{3,1}^0 \right) + 
+      \frac{Z_a}{3 m_a} \calMh_{1,1}^0 \frac{E_z}{\vath}  \\ & - \calMh_{2,0}^0 \left(\Rdtrhoa + 2 \Rdtvath \right) + \calRh_{2,0}^0 ~.  \label{dtKha1D2V}
+  \end{aligned}
+  \end{eqnarray}
+  
+  当$j=l=1$时，方程\EQ{dtMhjl}为$z$方向无相对论效应时的\textbf{1D宏观运动方程}，即
+  \begin{eqnarray}
+  \begin{aligned}
+      \ddt \calMhIIo  =& \ - \calMhIIo \left(\Rdtrhoa + \Rdtvath \right) + 3 \calMho \frac{Z_a}{ m_a} \frac{\bfE}{\vath}  \\ &
+      - \frac{1}{\rho_a {\rmv}{_{ath}} } \ddz  \left[ \rho_a {\rmv}{_{ath}^2} \left(\calMh_{2,0}^0 + \frac{2}{5} \calMh_{2,2}^0 \right) \right] + \calRh_{1,1}^0 ~.  \label{dtuha1D2V}
+  \end{aligned}
+  \end{eqnarray}
+  应用方程\EQ{Khauha}与\EQ{dtna1D2V},在方程\EQ{dtuha1D2V}两边乘以$(2 \uh_a \cdot)$并减去方程\EQ{dtKha1D2V}，经过合并同类项化简得
+  \begin{eqnarray}
+  \begin{aligned}
+      \Rdtvath =& \left(\frac{1}{2} - \frac{1}{3} \uhaz^2 \right) \frac{1}{\rho_a} \ddz \left(\rho_a \vath \uhaz \right)    - 
+      \frac{1}{3} \frac{1}{\rho_a \vath^2} \ddz \left (\frac{1}{3} \rho_a \vath^3 \calMh_{3,1}^0 \right)
+      \\
+      + & \frac{2}{3} \frac{\uhaz}{\rho_a \vath} \ddz \left[ \rho_a \vath^2 \left(\frac{1}{3} \calMh_{2,0}^0 + \frac{2}{15} \calMh_{2,2}^0 \right) \right] 
+      \\ 
+      + & \frac{1}{3} \calRh_{2,0}^0 - \frac{2}{9} \uhaz \calRh_{1,1}^0   ~.  \label{dtvath1D2V}
+  \end{aligned}
+  \end{eqnarray}
+  此即为\textbf{1D维热平衡方程}。
+  组分$a$的动量与总能量随时间的变化率为
+  \begin{eqnarray}
+      \ddt I_a  &=& \rho_a \vath \left(\ddt \calMh_{1,1}^0 + \calMh_{1,1}^0 \Rdtvath \right),  \label{dtIa1D2V} \\
+      \ddt K_a  &=& \rho_a \left(\frac{1}{2} \vath^2 \ddt \calMh_{2,0}^0 + \calMh_{2,0}^0 \Rdtvath \right) ~ . \label{dtKa1D2V} 
+  \end{eqnarray}
+  特别地，当空间梯度可忽略时，方程\EQ{dtna1D2V}与\EQ{dtvath1D2V}-\EQ{dtKa1D2V}即为
+  \begin{eqnarray}
+      \Rdtrhoa &\approx& 0 , \label{dtna0D2V}
+      \\
+      \Rdtvath &\approx& \frac{1}{3} \left( \calRh_{2,0}^0 - 2 \uhaz \times \frac{1}{3} \calRh_{1,1}^0 \right), \label{dtvath0D2V}
+      \\
+      \frac{1}{\rho_a \vath} \ddt I_a &\approx& 3 \frac{Z_a}{m_a} \frac{E_z}{\vath} + (1 - \frac{4}{3} \uhaz^2) \calRh_{1,1}^0 \label{dtIa1D2Vu0} 
+  \end{eqnarray}
+  以及
+  \begin{eqnarray}
+      \frac{1}{\rho_a \vath^2} \ddt K_a &\approx& \frac{Z_a}{m_a} \vath \uhaz E_z + \frac{1}{2} \calRh_{2,0}^0 ~ . \label{dtKa1D2Vu0} 
+  \end{eqnarray}
+  此时，方程\EQ{RdtMjlVFP}即为
+  \begin{eqnarray}
+      \delta_t \calMh_{j,l}^0 & = & \calMh_j \left(\Ehl \right) + \calRh_j \left(\colhla \right) ~.  \label{RdtMjlVFP2}
+  \end{eqnarray}
+  
+
+  方程\EQ{dtMhjl}意味着，在理论上速度空间轴对称性使得物理空间中不存在宏观磁场，且只有对称轴方向存在宏观电场以及动理学矩梯度。此时3D维速度矩方程\EQ{MEq}约化为\textbf{1D维归一化动理学矩方程}形式\EQ{dtMhjl}-\EQ{dtvath1D2V}；对应的VFP方程\EQ{VFPhdAEBC}约化为1D-2V维轴对称VFP谱方程\EQ{VFPhldAEBC}。
+  
+  \begin{definition} \label{定义-King函数}
+      定义\textbf{King函数}为
+      \begin{eqnarray}
+        \Kl \left(\rmv;\mu,\sigma \right) = \frac{1}{\sigma^2 \sqrt{2 \sigma \mu \rmv}} e^{-\sigma^{-2} \left (\rmv^2 + \mu^2  \right)} Besseli \left(\frac{2l+1}{2}, 2 \frac{\mu}{\sigma} \rmv \right) ~.  \label{King}
+      \end{eqnarray}
+      其中，自变量$\rmv\in \left [0,\infty \right)$，参数$l \in \left [0,N^+ \right)$是King函数的阶数；参数$\mu,\sigma$是King函数的\textbf{特征参量}，且分别满足$\sigma > 0$ 以及 $\mu \ge 0$。
+  \end{definition}
+当$\xihas=2\mu \rmv / \sigma \to 0$时，有
+\begin{eqnarray}
+    \lim_{\xihas \to 0} \Kl \left(\rmv;\mu,\sigma \right) = \frac{\sqrt{2/\pi}  e^{-\sigma^{-2} \left (\rmv^2 + \mu^2  \right)}}{(2 l + 1)!!} \frac{\xihas^l}{\sigma^3} \left [1 + \sum_{k=1}^{N^+} \frac{1}{2^l l!} \frac{(2 l + 1)!! \xihas^{2k}}{(2 l + 2 k + 1)!!} \right] ~.  \label{Kingxi}
+\end{eqnarray}
+特别地，当$\xihas \equiv 0$时，有
+% \overset{\xihas = 0}
+\begin{eqnarray}
+    \Kl \left(\rmv;\mu,\sigma \right) \xlongequal[]{\xihas = 0} \delta_l^0 \frac{\sqrt{2/\pi}}{(2 l + 1)!!} \frac{1}{\sigma^3}  e^{-\sigma^{-2} \left (\rmv^2 + \mu^2  \right)} ~.  \label{Kingxi0}
+\end{eqnarray}
+  
+  \begin{proposition} \label{定理-VFP的解1D2V-King混合分布s}
+      具有如下形式的分布函数是\textbf{1D-2V维轴对称VFP谱方程}\EQ{VFPhldAEBC}的一组理论解，
+      \begin{eqnarray}
+        \fhlm \left(\r,\rmvh,t \right) = \delta_m^0  C_l \sum_{s=1}^{N}  \left [ \left (\muuas \right)^l \nhas \Kl \left(\rmvh;\left |\uhazs \right |,\vhaths \right) \right] ~.  \label{fhlfhls}
+      \end{eqnarray}
+      其必要条件是
+      \begin{eqnarray}
+        \sum_{s=1}^{N} \nhas  &=&  1 ~, \label{nhasAxis0}
+        \\
+        \sum_{s=1}^{N} \nhas \left(\vhaths^2 + \frac{2}{3} \uhazs^2 \right) - \frac{2}{3}  \left(\sum_{s=1}^{N} \nhas \uhazs \right)^2   &=& 1 ~ . \label{ThasAxis0}
+      \end{eqnarray}
+      其中，正整数$N$是任意阶子分布函数个数；参数$\nhas$是与$s$相关的\textbf{权重系数}；$\uhazs$与$\vhaths$是与$s$相关的\textbf{特征参数}。特征参数$\nhas=\nas / n_a$、$\uhazs=\uazs / \vath$与$\vhaths = \vaths / \vath$分别表示组分$a$的第$(l,0)$阶归一化振幅$\fhl$的第$s$个子分布的权重系数、期望与标准差；分别具有归一化密度、归一化速度与归一化热速度的含义。$\muuas=\cos{\left <\uhas,\bfe_z \right>}=sign \left(\uhazs \right)$表示$\uhas$与极轴之间夹角的余弦值；与$l$相关的常数$C_l$为
+      \begin{eqnarray}
+        C_l &=& \frac{\sqrt{2 \pi}}{\pi^{3/2}} \frac{2 l + 1}{2}  ~.  \label{Cl}
+      \end{eqnarray}
+  \end{proposition}
+
+  \begin{proof}
+      根据定义式\EQ{na}-\EQ{ua}及\EQ{Ka}计算可得等离子体组分$a$的粒子数密度、平均速度与总能量密度分别为
+      \begin{eqnarray}
+        n_a \left(\r,t \right) &=& n_a \sum_{s=1}^{N} \nhas , \label{nasAxis}
+        \\
+        \ua \left(\r,t \right) &=& \frac{I_a}{\rho_a} = \sum_{s=1}^{N} \nhas \uazs , \label{uasAxis}
+        \\
+        K_a \left(\r,t \right) &=&  n_a T_a \Kh_a \quad = \quad  \frac{3}{2} n_a T_a \sum_{s=1}^{N} \nhas \left(\vhaths^2 + \frac{2}{3} \uhazs^2 \right) ~. \label{KasAxis}
+      \end{eqnarray}
+      若函数\EQ{fhlfhlsl}是方程\EQ{VFPhldAEBC}的解，由质量、动量与能量守恒定律可得归一化的粒子数密度、平均速度与总能量密度满足
+      \begin{eqnarray}
+        \nh_a \left(\r,t \right) &=& \sum_{s=1}^{N} \nhas \quad \equiv \quad 1 ~, \label{nhasAxis}
+        \\
+        \uhaz \left(\r,t \right) &=& \frac{I_a}{\rho_a \vath} = \sum_{s=1}^{N} \nhas \uhazs , \label{uhazsAxis}
+        \\
+        \Kh_a \left(\r,t \right) & = & \frac{3}{2} \sum_{s=1}^{N} \nhas \left(\vhaths^2 + \frac{2}{3} \uhazs^2 \right) ~. \label{KhasAxis}
+      \end{eqnarray}
+      应用动能定义\EQ{Eka}以及关系式\EQ{Khauha}可得归一化动能密度与归一化温度满足
+      \begin{eqnarray}
+        \Ehkaz \left(\r,t \right) &=& \uhaz^2, \label{EhkaAxis}
+        \\
+        \Th_a \left(\r,t \right) &=& \sum_{s=1}^{N} \nhas \left(\vhaths^2 + \frac{2}{3} \uhazs^2 \right) - \frac{2}{3}  \uhaz^2  \quad \equiv \quad 1 ~ . \label{ThasAxis}
+      \end{eqnarray}
+      得证。
+  \end{proof}
+  记方程\EQ{fhlfhls}为\textbf{King混合分布，（King Mixture Model，KMM）}。需要指出的是，方程\EQ{nhasAxis0}与\EQ{ThasAxis0}是必要而不充分条件。在物理上，其描述的是分布函数前几阶动理学矩之间相互依赖关系。理论上应该有更多类似约束条件描述高阶动理学矩之间的关系。定理\ref{定理-VFP的解1D2V-King混合分布s}描述的是一组不同状态参量（粒子数密度、平均速度与温度）的漂移Maxwellian分布（\textbf{Gaussian混合分布}）组成的\textbf{非均匀空间亚平衡态}分布在$(l,m)$谱空间中的形式，即\textbf{King混合分布}。
+  
+  \begin{proposition} \label{定理-VFP的解1D2V-King混合分布su}
+      若组分$a$的\textbf{动理学动能密度}等于所有子分布的动理学动能密度之和，即有如下关系
+      \begin{eqnarray}
+        \Ekaz \left(\r,t \right) &=& \frac{1}{2} m_a \sum_{s=1}^{N}  \nas \uazs^2 . \label{EkasuaAxis}
+      \end{eqnarray}
+      其归一化形式为
+      \begin{eqnarray}
+        \uhaz^2 \left(\r,t \right) &=& \sum_{s=1}^{N} \nhas \uhazs^2 . \label{uhazuazsAxis}
+      \end{eqnarray}
+      可以证明此时方程\EQ{fhlfhls}中不同子分布具有相同的归一化速度，即$\uhazs \equiv \uhaz$。此时第$(l,0)$阶归一化分布函数可以表述为
+      \begin{eqnarray}
+        \fhlm \left(\r,\rmvh,t \right) = \delta_m^0  C_l \sum_{s=1}^{N}  \left [ \left (\muua \right)^l \nhas \Kl \left(\rmvh;\left |\uhaz \right |,\vhaths \right) \right] ~.  \label{fhlfhlnTsu}
+      \end{eqnarray}
+  \end{proposition}
+  \noindent
+  在质心坐标系中，方程\EQ{fhlfhlnTsu}退化为方程\EQ{fhofhos}。换而言之，若组分$a$的所有子分布具有相同的平均速度，则组分$a$处于热力学准平衡态。
+  
+  \begin{proposition} \label{定理-VFP的解1D2V-King混合分布sT}
+      若组分$a$的\textbf{动理学内能密度}等于所有子分布的动理学内能密度；即有如下关系
+      \begin{eqnarray}
+        \epsilon_a \left(\r,t \right) &=& \frac{3}{4} m_a \sum_{s=1}^{N}  \nas \vaths^2 . \label{epsTaAxis}
+      \end{eqnarray}
+      把方程\EQ{epsilonaTa}代入上式化简可得
+      \begin{eqnarray}
+        1 &=& \sum_{s=1}^{N} \nhas \vhaths^2 . \label{ThaTasAxis}
+      \end{eqnarray}
+      可以证明此时方程\EQ{fhlfhls}中不同子分布具有相同的归一化速度，即$\uhazs \equiv \uhaz$。此时第$(l,0)$阶归一化分布函数满足方程\EQ{fhlfhlnTsu}。
+  \end{proposition}
+  定理\ref{定理-VFP的解1D2V-King混合分布su}与定理\ref{定理-VFP的解1D2V-King混合分布sT}是相互等价的表述。进一步地，根据上述两个定理到如下推论。
+  \begin{corollary} \label{定理-VFP的解1D2V-King分布}
+      若组分$a$的所有子分布动理学温度相等、\textbf{动理学动能密度}等于所有子分布的动理学动能密度之和（等价于\textbf{动理学内能密度}等于所有子分布的动理学内能密度之和），即$\vhaths \equiv \vhath = 1$，$\uhazs \equiv \uhaz$。此时第$(l,0)$阶归一化分布函数可以表述为
+      \begin{eqnarray}
+            \fhlm \left(\r,\rmvh,t \right) = \delta_m^0 C_l \left(\muua \right)^l \Kl \left(\rmvh;\left |\uhaz \right |,1 \right)  ~.  \label{fhl}
+      \end{eqnarray}
+  \end{corollary}
+  \noindent
+  上述方程是\textbf{漂移Maxwellian分布}在球极坐标系中的形式，记为\textbf{King分布（King Model， KM）}。可以验证，King模型\EQ{fhl}中特征参量在自碰撞过程中不随时间改变。
+
+  \begin{proposition} \label{定理-VFP的解1D2V-King混合分布sl}
+      更一般地，令$N_l$是第$l$阶振幅函数$\fhlm$子分布函数的个数；参数$\muuasl$、$\nhasl$、$\uhazsl$、与$\vhathsl$是与$l$及$s$相关的特征参数。则函数
+      \begin{eqnarray}
+        \fhlm \left(\r,\rmvh,t \right) = \delta_m^0 C_l \sum_{s=1}^{N_l} \left [ \left (\muuasl \right)^l \nhasl \Kl \left(\rmvh;\left |\uhazsl \right | , \vhathsl \right) \right ]   \label{fhlfhlsl}
+      \end{eqnarray}
+      是\textbf{1D-2V维轴对称VFP谱方程}\EQ{VFPhldAEBC}的更一般的理论解。其必要条件是
+      \begin{eqnarray}
+        \sum_{s=1}^{N} \nhaso &=& 1 ~, \label{nhaslAxis0}
+        \\
+        \sum_{s=1}^{N} \nhaso \left(\vhathso^2 + \frac{2}{3} \uhazso^2 \right) - \frac{2}{3}  \left(\sum_{s=1}^{N} \nhasI \uhazsI \right)^2  &=& 1 ~ . \label{ThaslAxis0}
+      \end{eqnarray}
+  \end{proposition}
+  
+  \begin{proof}
+      根据定义式\EQ{na}-\EQ{ua}及\EQ{Ka}计算可得等离子体组分$a$的粒子数密度、平均速度与总能量密度分别为
+      \begin{eqnarray}
+        n_a \left(\r,t \right) &=& n_a \sum_{s=1}^{N} \nhaso , \label{naslAxis}
+        \\
+        \ua \left(\r,t \right) &=& \frac{I_a}{\rho_a} = \sum_{s=1}^{N} \nhasI \uasI , \label{uaslAxis}
+        \\
+        K_a \left(\r,t \right) &=&  n_a T_a \Kh_a \quad = \quad  \frac{3}{2} n_a T_a \sum_{s=1}^{N} \nhaso \left(\vhathso^2 + \frac{2}{3} \uhazso^2 \right) ~. \label{KaslAxis}
+    \end{eqnarray}
+    若函数\EQ{fhlfhlsl}是方程\EQ{VFPhldAEBC}的解，则归一化的粒子数密度、平均速度与总能量密度满足\begin{eqnarray}
+      \nh_a \left(\r,t \right) &=& \sum_{s=1}^{N} \nhaso \quad \equiv \quad 1 ~, \label{nhaslAxis}
+      \\
+      \uhaz \left(\r,t \right) &=& \frac{I_a}{\rho_a \vath} = \sum_{s=1}^{N} \nhasI \uhazsI , \label{uhazslAxis}
+      \\
+      \Kh_a \left(\r,t \right) & = &  \sum_{s=1}^{N} \nhaso \left(\vhathso^2 + \frac{2}{3} \uhazso^2 \right)  ~. \label{KhaslAxis}
+    \end{eqnarray}
+    应用动能定义\EQ{Eka}以及关系式\EQ{Khauha}可得归一化动能密度与归一化温度满足
+    \begin{eqnarray}
+      \Ehkazs \left(\r,t \right) &=& \uhaz^2, \label{EhkaslAxis}
+      \\
+      \Th_a \left(\r,t \right) &=& \sum_{s=1}^{N} \nhaso \left(\vhathso^2 + \frac{2}{3} \uhazso^2 \right) - \frac{2}{3}  \uhaz^2  \quad \equiv \quad 1 ~ . \label{ThaslAxis}
+    \end{eqnarray}
+    得证。
+  \end{proof}
+  对比定理\ref{定理-VFP的解1D2V-King混合分布s}，可知King混合分布是方程\EQ{fhlfhlsl}的特例。记\EQ{fhlfhlsl}为\textbf{广义King混合分布（General King Mixture Model，GKMM）}。当所有阶振幅函数具有相同的子分布个数以及特征参数集
+  时，广义King混合分布退化为King混合分布。
+  
+  \subsubsection{3D-3V维归一化动理学矩方程}
+  \label{3D-3V维归一化动理学矩方程}
+  
+  把方程\EQ{Ahlm}-\EQ{Bl}代入方程\EQ{dtMhjlmVFP}，应用分部积分以及合并同类项，则第$(j,l,m)$阶\textbf{归一化动理学矩演化方程}为
+  \begin{eqnarray}
+      \ddt \calMhjlm  &=& - \calMhjlm \left(\Rdtrhoa + j \Rdtvath \right) + \delta_t \calMh_{j,l}^m  ~.  \label{dtMhjlm}
+  \end{eqnarray}
+  其中，
+  \begin{eqnarray}
+  \begin{aligned}
+      \delta_t \calMh_{j,l}^m  =  &  - \frac{1}{\rho_a {\rmv}{_{ath}^j} } \nabla \cdot \left(\rho_a {\rmv}{_{ath}^j} \calMhAjlm \right) \\ &
+      + \frac{Z_a}{m_a} \left(\calMhEjlm \cdot \frac{\bfE}{\vath} + \calMhBjlm \cdot \bfB \right)  + \calRh_{j,l}^m ~.   \label{RdtMjlmVFP3}
+  \end{aligned}
+  \end{eqnarray}
+  以及
+  \begin{eqnarray}
+      \calMhAjlm &=&  
+      \begin{bmatrix}
+          \calMhAxjlm & \calMhAyjlm  & \calMhAzjlm
+      \end{bmatrix} , \label{calMhAjlm} \\ 
+      \calMhEjlm &=&  
+      \begin{bmatrix}
+          \calMhExjlm & \calMhEyjlm  & \calMhEzjlm
+      \end{bmatrix} , \label{calMhEjlm} \\ 
+      \calMhBjlm &=&  
+      \begin{bmatrix}
+          \calMhBxjlm & \calMhByjlm  & \calMhBzjlm
+      \end{bmatrix} ~. \label{calMhBjlm}
+  \end{eqnarray}
+  当$m \ge 1$时，上述方程中空间对流项各分量为
+  \begin{eqnarray}
+  \begin{aligned}
+      \calMhAxjlm \ =& \ \CAlnmn \calMhjplnmn + \CAlpmn \calMhjplpmn 
+      \\ 
+      + & \CAlnmp \calMhjplnmp +  \CAlpmp \calMhjplpmp , \label{calMhAxjlm} 
+      \\
+      \calMhAyjlm \ =& \ - i \left( \CAlnmn \calMhjplnmn + \CAlpmn \calMhjplpmn \right) 
+      \\ 
+       & + i \left( \CAlnmp \calMhjplnmp +  \CAlpmp \calMhjplpmp  \right) , \label{calMhAyjlm} 
+      \\
+      \calMhAzjlm \ =& \ \CAlnm \calMhjplnm + \CAlpm \calMhjplpm ~. \label{calMhAzjlm}
+  \end{aligned}
+  \end{eqnarray}
+  电场扩散项各分量为
+  \begin{eqnarray}
+  \begin{aligned}
+      \calMhExjlm \ =& \ \CMElnmn \calMhjnlnmn + \CMElpmn \calMhjnlpmn \\ 
+      + & \CMElnmp \calMhjnlnmp +  \CMElpmp \calMhjnlpmp , \label{calMhExjlm} 
+      \\
+      \calMhEyjlm \ =& \ - i \left( \CMElnmn \calMhjnlnmn + \CMElpmn \calMhjnlpmn \right) \\ 
+      & + i \left( \CMElnmp \calMhjnlnmp +  \CMElpmp \calMhjnlpmp  \right) , \label{calMhEyjlm} 
+      \\
+      \calMhEzjlm \ =& \ \CMElnm \calMhjnlnm + \CMElpm \calMhjnlpm ~ . \label{calMhEzjlm}
+  \end{aligned}
+  \end{eqnarray}
+  磁场扩散项各分量为
+  \begin{eqnarray}
+  \calMhBxjlm &=& i \left( \CBlmn \calMhjlmn - \CBlmp \calMhjlmp \right) , \label{calMhBxjlm} \\
+  \calMhByjlm &=& \CBlmn \calMhjlmn + \CBlmp \calMhjlmp , \label{calMhByjlm} \\
+  \calMhBzjlm &=& i \CBlm \calMhjlm  ~. \label{calMhBzjlm}
+  \end{eqnarray}    
+  
+  当$m = 0$时，方程\EQ{dtMhjlm}中空间对流项各分量为
+  \begin{eqnarray}
+      \calMhAxjl &=& 2 \left [ \CAlnI \R \left( \calMhjplnI \right) + \CAlpI \R \left( \calMhjplpI \right) \right], \label{calMhAxjl} \\
+      \calMhAyjl &=& - 2 \left [ \CAlnI \I \left( \calMhjplnI \right) + \CAlpI \I \left( \calMhjplpI \right) \right] , \label{calMhAyjl} \\  
+      \calMhAzjl &=& \CAlno \calMhjplno + \CAlpo \calMhjplpo ~. \label{calMhAzjl}
+  \end{eqnarray}
+  电场扩散项各分量为
+  \begin{eqnarray}
+      \calMhExjl &=& 2 \left [ \CMElnI \R \left( \calMhjnlnI \right) + \CMElpI \R \left( \calMhjnlpI \right) \right], \label{calMhExjl} \\
+      \calMhEyjl &=& - 2 \left [ \CMElnI \I \left( \calMhjnlnI \right) + \CMElpI \I \left( \calMhjnlpI \right) \right] , \label{calMhEyjl} \\  
+      \calMhEzjl &=& \CMElno \calMhjnlno + \CMElpo \calMhjnlpo ~. \label{calMhEzjl}
+  \end{eqnarray}
+  磁场扩散项各分量为
+  \begin{eqnarray}
+  \calMhBxjl &=& 2 \CBlI \I \left( \calMhjlI \right), \label{calMhBxjl} \\
+  \calMhByjl &=& 2 \CBlI \R \left( \calMhjlI \right) , \label{calMhByjl} \\
+  \calMhBzjl &=& 0 ~. \label{calMhBzjl}
+  \end{eqnarray}
+  
+  方程\EQ{dtMhjlmVFP}-\EQ{calMhBzjl}给出了第$(j,l,m)$阶归一化动理学矩演化方程的具体形式。其在数学上是一个积分方程，即满足第$(j,l,m)$阶动理学矩守恒的第$(l,m)$阶VFP谱方程的积分形式。特别地，当$m=l=0$时，磁场扩散项为零；则第$j$阶归一化动理学矩演化方程为
+  \begin{eqnarray}
+  \begin{aligned}
+      \ddt \calMhj  =&  - \frac{1}{\rho_a {\rmv}{_{ath}^j} } \nabla \cdot  \left[ \frac{1}{3} \rho_a  {\rmv}{_{ath}^j} \calMhjpfhI \right] + 
+      \frac{Z_a}{3 m_a} \calMhjnfhI \cdot \frac{\bfE}{\vath}  
+      \\ 
+      & - \calMhj \left(\Rdtrhoa + j \Rdtvath \right) + \calRh_{j,0}^0 ~.  \label{dtMhj00}
+  \end{aligned}
+  \end{eqnarray}
+  其中，空间对流项与电场扩散项为
+  \begin{eqnarray}
+      \calMhAj &=&  \frac{1}{3}
+      \begin{bmatrix}
+          2 \R \left( \calMhjpII \right) & - 2 \I \left( \calMhjpII \right)  & \calMhjpIo
+      \end{bmatrix}
+      , \label{calMhAj} \\
+      \calMhEj &=&  \frac{j}{3}
+      \begin{bmatrix}
+          2 \R \left( \calMhjnII \right) & - 2 \I \left( \calMhjnII \right)  & \calMhjnIo
+      \end{bmatrix}
+      ~. \label{calMhEj}
+  \end{eqnarray}
+
+  当$j=0$与$j=2$时，方程\EQ{dtMhj00}分别为
+  \begin{eqnarray}
+      \calRh_{0,0}^0 &=& \ddt \calMho + \calMho \Rdtrhoa + \frac{1}{\rho_a  } \nabla \cdot \left[ \frac{1}{3} \rho_a \vath \calMhIfhI \right]  = 0  \label{dtMh000}
+  \end{eqnarray}
+  与
+  \begin{eqnarray}
+  \begin{aligned}
+      \ddt \calMh_{2,0}^0  =&  - \frac{1}{\rho_a {\rmv}{_{ath}^2} } \nabla \cdot  \left[ \frac{1}{3} \rho_a  {\rmv}{_{ath}^3} \calMhIIIfhI \right] + 
+      \frac{2}{3} \frac{Z_a}{ m_a}  \frac{1}{\vath} \calMhIfhI \cdot \bfE 
+      \\ 
+      & - \calMh_{2,0}^0 \left(\Rdtrhoa + 2 \Rdtvath \right) + \calRh_{2,0}^0 ~.  \label{dtMh200}
+  \end{aligned}
+  \end{eqnarray}
+  上述两个方程即为在$(l,m)$谱空间中的\textbf{数密度守恒方程}与忽略相对论效应的\textbf{总能量守恒方程}。应用矩定义\EQ{na}-\EQ{Mjlm}及\EQ{Mhjlm}，方程\EQ{dtMh000}与\EQ{dtMh200}可表述为
+  \begin{eqnarray}
+      \Rdtrhoa &=& - \frac{1}{\rho_a  } \nabla \cdot \left( \rho_a \vath \uh_a \right)  \label{dtna}
+  \end{eqnarray}
+  与
+  \begin{eqnarray}
+  \begin{aligned}
+      \ddt \Kh_a  =&  - \frac{1}{\rho_a {\rmv}{_{ath}^2} } \nabla \cdot  \left[ \frac{1}{3} \rho_a  {\rmv}{_{ath}^3} \calMhIIIfhI \right] + 
+      2 \frac{Z_a}{ m_a} \frac{1}{\vath} \uh_a \cdot \bfE 
+      \\ 
+      & - \Kh_a \left(\Rdtrhoa + 2 \Rdtvath \right) + \calRh_{2,0}^0 ~.  \label{dtKha}
+  \end{aligned}
+  \end{eqnarray}
+  上述两个方程可进一步化简为\EQ{MEqna}与\EQ{MEqKa}的形式。同理可以验证，当$j=l=1$且$m=0$时，方程\EQ{dtMhjlm}为$z$方向无相对论效应时的宏观运动方程；当$m=1$时方程\EQ{dtMhjlm}的实部与虚部分别为$x$与$y$方向宏观运动方程。则在$(x,y,z)$坐标系中，\textbf{宏观运动方程}三维矢量形式可表述为
+  % \begin{eqnarray}
+  % \begin{aligned}
+  %     \frac{1}{3} \ddt \calMhIfhI  =& \frac{1}{3} \calRh_1 \left(\left \{\colhI  \right \}  \right) + \frac{Z_a}{ m_a} \left[\calMho \frac{\bfE}{\vath} + \frac{1}{3} \ddt \calMhIfhI \times \bfB \right] 
+  % \\
+  % - & \frac{1}{3} \calMhIfhI \left(\Rdtrhoa + 2 \Rdtvath \right)  - \frac{1}{n_a {\rmv}{_{ath}^2} } \nabla \cdot  \left[ n_a  {\rmv}{_{ath}^2} \calMh_{0,2}  \right]~.  \label{dtMh1}
+  % \end{aligned}
+  % \end{eqnarray}
+  \begin{eqnarray}
+  \begin{aligned}
+      \ddt \calMhIfhI  = & \ \calRh_1 \left(\left \{\colhI  \right \}  \right) + \frac{Z_a}{ m_a} \left[3 \calMho \frac{\bfE}{\vath} + \calMhIfhI \times \bfB \right]  
+      \\ 
+      & - \calMhIfhI \left(\Rdtrhoa + 2 \Rdtvath \right)  
+      \\
+      & - \frac{3}{\rho_a {\rmv}{_{ath}^2} } \nabla \cdot  \left( \rho_a  {\rmv}{_{ath}^2} \bfMh_{0,2}  \right) ~.  \label{dtuha}
+  \end{aligned}
+  \end{eqnarray}
+
+  一般形式的第$(j,l,m)$阶归一化动理学矩演化方程\EQ{dtMhjlm}中含有质量密度$\rho_a$与热速度$\vath$的一阶时间偏导数；其中质量密度时间偏导数项由方程\EQ{dtna}给出。应用方程\EQ{Khauha}与\EQ{dtna},在方程\EQ{dtuha}两边乘以$(2 \uh_a \cdot)$并减去方程\EQ{dtKha}，经过合并同类项化简得
+  \begin{eqnarray}
+  \begin{aligned}
+      \Rdtvath =& \left(\frac{1}{2} - \frac{1}{3} \uh_a^2 \right) \frac{1}{\rho_a} \nabla \cdot \left(\rho_a \vath \uh_a \right)   + \frac{2}{3} \frac{\uh_a}{\rho_a \vath} \cdot \left[\nabla \cdot \left(\rho_a \vath^2 \bfMh_{0,2} \right) \right] 
+      \\ &
+      - \frac{1}{3} \frac{1}{\rho_a \vath^2} \nabla \cdot \left [\frac{1}{3} \rho_a \vath^3 \calMhIIIfhI \right] 
+      \\ &
+      + \frac{1}{3} \calRh_{2,0}^0 - \frac{2}{9} \uh_a \cdot \calRh_1  \left(\left \{\colhI{_a} \right \} \right)  ~.  \label{dtvath}
+  \end{aligned}
+  \end{eqnarray}
+  此即\textbf{3D维热平衡方程}。方程\EQ{dtna}、\EQ{dtvath}与\EQ{dtMhjlm}共同描述任意阶归一化动理学矩$\calMhjlm$随时间的演化。
+
+  特别地，当组分$a$的归一化平均速度$\uha = \calMhIfhI$为零时，有
+  \begin{eqnarray}
+      \Rdtrhoa &=& \Rdtna = 0, \label{dtnaua0} \\
+      \ddt \calMhIfhI  &=& \calRh_1 \left(\left \{\colhI  \right \}  \right) + 3 \frac{Z_a}{ m_a} \frac{\bfE}{\vath} - \frac{3}{\rho_a {\rmv}{_{ath}^2} } \nabla \cdot  \left( \rho_a  {\rmv}{_{ath}^2} \bfMh_{0,2}  \right) ,  \label{dtuhaua0} 
+      \\
+      \Rdtvath &=&  - \frac{1}{3} \frac{1}{\rho_a \vath^2} \nabla \cdot \left [\frac{1}{3} \rho_a \vath^3 \calMhIIIfhI \right] + \frac{1}{3} \calRh_{2,0}^0  ~.  \label{dtvathua0}
+  \end{eqnarray} 
+  
+
+  
+
+  
